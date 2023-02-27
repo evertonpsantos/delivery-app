@@ -1,13 +1,17 @@
 import { node } from 'prop-types';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import LoginContext from './LoginContext';
 
 export default function LoginProvider({ children }) {
-  const name = '';
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const contextValue = useMemo(() => ({
-    name,
-  }), []);
+    email,
+    setEmail,
+    password,
+    setPassword,
+  }), [email, password]);
 
   return (
     <LoginContext.Provider value={ contextValue }>
