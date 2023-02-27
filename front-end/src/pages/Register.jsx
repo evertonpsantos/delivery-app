@@ -7,7 +7,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [isHidden, setIsHidden] = useState(true);
   const [erro, setErro] = useState('');
-  const [button, setButton] = useState([true, true, true]);
+  const [button, setButton] = useState(true);
 
   const NAME_LENGTH = 12;
   const VERIFY_EMAIL = (testEmail) => /\S+@\S+\.\S+/.test(testEmail);
@@ -23,7 +23,10 @@ function Register() {
     } else if (password.length < PASSWORD_LENGTH) {
       setErro('Senha menor que 6 dígitos');
       setIsHidden(false);
-    } else { setButton(false); }
+    } else {
+      setIsHidden(true);
+      setButton(false);
+    }
   }, [name, email, password]);
 
   function register() {
