@@ -1,6 +1,6 @@
 const express = require('express');
-const loginRouter = require('../routes/LoginRouter');
 const cors = require('cors');
+const loginRouter = require('../routes/LoginRouter');
 
 const app = express();
 app.use(express.json());
