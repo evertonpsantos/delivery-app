@@ -1,19 +1,24 @@
+// import axios from 'axios';
 import { useContext, useState } from 'react';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
 
 function Login() {
-  const { email, setEmail, password, setPassword } = useContext(LoginContext);
-  const { invalidUser, setInvalidUser } = useState(false);
+  const { email, setEmail, password, setPassword, setUser } = useContext(LoginContext);
+  const [invalidUser, setInvalidUser] = useState(false);
 
   const handleSubmitButton = async () => {
+    const loginData = { email, password };
     const result = await fetch('http://localhost:3001/login', {
       method: 'POST',
-      body: { email, password },
+      body: JSON.stringify(loginData),
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      'Access-Control-Allow-Origin': '*',
     });
 
-    if (!result) return setInvalidUser(true);
-    return <p>Foi</p>;
+    if (result) return setUser(result);
+    setInvalidUser(true);
   };
 
   return (

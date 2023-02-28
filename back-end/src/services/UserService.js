@@ -1,11 +1,11 @@
 const { User } = require('../database/models');
 
 const getByEmailAndPassword = async ({ email }) => {
-  console.log(email);
-  const userFound = await User.findAll({
+  const userFound = await User.findOne({
     where: { email },
-    attributes: { exclude: ['password'] },
   });
+
+  if(!userFound) throw new Error('User not found');
 
   return userFound;
 };
