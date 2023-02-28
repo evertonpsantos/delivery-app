@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { useContext, useState } from 'react';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
@@ -9,16 +8,17 @@ function Login() {
 
   const handleSubmitButton = async () => {
     const loginData = { email, password };
+    const status404 = 404;
+
     const result = await fetch('http://localhost:3001/login', {
       method: 'POST',
       body: JSON.stringify(loginData),
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       'Access-Control-Allow-Origin': '*',
     });
 
-    if (result) return setUser(result);
-    setInvalidUser(true);
+    if (result.status === status404) return setInvalidUser(true);
+    setUser(result);
   };
 
   return (
