@@ -1,9 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
 
 function Login() {
   const { email, setEmail, password, setPassword } = useContext(LoginContext);
+  const { invalidUser, setInvalidUser } = useState(false);
+
+  const handleSubmitButton = async () => {
+    const result = await fetch('http://localhost:3001/login', {
+      method: 'POST',
+      body: { email, password },
+    });
+
+    if (!result) return setInvalidUser(true);
+    return <p>Foi</p>;
+  };
 
   return (
     <div>
@@ -36,6 +47,7 @@ function Login() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ verifyLoginInfo(email, password) }
+          onClick={ handleSubmitButton }
         >
           Login
         </button>
@@ -44,7 +56,10 @@ function Login() {
           Ainda não tenho conta
         </button>
 
-        <p data-testid="common_login__element-invalid-email">E-mail inválido</p>
+        { invalidUser && (
+          <p data-testid="common_login__element-invalid-email">E-mail Inválido</p>
+        )}
+
       </form>
     </div>
   );
