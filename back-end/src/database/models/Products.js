@@ -1,12 +1,9 @@
 'use strict';
-const { Model } = require('sequelize');
-const db = require('./index');
 
 module.exports = (sequelize, DataTypes) => {
-  class Product extends Model { }
-  Product.init({
+  const product = sequelize.define('Product', {
     id: {
-      type: INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
@@ -15,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER,
     urlImage: DataTypes.STRING
   }, {
-    sequelize: db,
     modelName: 'Product',
     underscored: true,
     timestamps: false,
     tableName: 'products',
   });
-  return Product;
+
+  return product;
 };
