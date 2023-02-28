@@ -16,13 +16,10 @@ function Register() {
   useEffect(() => {
     if (name.length < NAME_LENGTH) {
       setErro('Quantidade de caracteres menor que 12');
-      setIsHidden(false);
     } else if (!(VERIFY_EMAIL(email))) {
       setErro('Digite um email válido');
-      setIsHidden(false);
     } else if (password.length < PASSWORD_LENGTH) {
       setErro('Senha menor que 6 dígitos');
-      setIsHidden(false);
     } else {
       setIsHidden(true);
       setButton(false);
