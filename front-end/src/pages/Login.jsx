@@ -1,10 +1,12 @@
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
 
 function Login() {
   const { email, setEmail, password, setPassword, setUser } = useContext(LoginContext);
   const [invalidUser, setInvalidUser] = useState(false);
+  const history = useHistory();
 
   const handleSubmitButton = async () => {
     const loginData = { email, password };
@@ -18,7 +20,23 @@ function Login() {
     });
 
     if (result.status === status404) return setInvalidUser(true);
-    setUser(result);
+
+    const jsonResult = await result.json();
+
+    setUser(jsonResult);
+    switch (jsonResult.role) {
+    case 'administrator':
+      history.push('/administrator');
+      break;
+    case 'seller':
+      history.push('/seller');
+      break;
+    case 'customer':
+      history.push('/customer/products');
+      break;
+    default:
+      break;
+    }
   };
 
   return (
