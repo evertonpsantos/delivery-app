@@ -1,13 +1,9 @@
 'use strict';
-const { Model } = require('sequelize');
-const db = require("./index");
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model { }
-
-  User.init({
+  const user = sequelize.define('User', {
     id: {
-      type: INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
@@ -17,11 +13,23 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
-    sequelize: db,
     modelName: 'User',
     underscored: true,
     timestamps: false,
     tableName: 'users',
   });
-  return User;
+
+  user.associate = (models) => {
+    user.hasMany(models.Sale, {
+      foreignKey: 'user_id',
+      as: 'user'
+    })
+
+    user.hasMany(models.Sale, {
+      foreignKey: 'seller_id',
+      as: 'seller'
+    })
+  };
+
+  return user;
 };
