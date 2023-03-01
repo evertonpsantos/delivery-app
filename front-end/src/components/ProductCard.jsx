@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/cardCustomesProducts.css';
+import ContextProduct from '../context/ProductContext';
 
 function ProductCard({ productInfo }) {
   const { name, id, price, urlImage } = productInfo;
   const [quantity, setQuantity] = useState(0);
+  const { cart, setCart } = useContext(ContextProduct);
+
+  const updateCart = () => {
+    const newCart = [...cart];
+    const isInTheCart = cart.find((item) => item.name === name);
+    if (!isInTheCart) return setCart([...cart, { name, price, id, quantity }]);
+    const itemCartIndex = newCart.indexOf(isInTheCart);
+    newCart[itemCartIndex].quantity = quantity;
+    setCart(newCart);
+  };
 
   const onChangeHandler = (event) => {
     setQuantity(event.target.value);
-    console.log(quantity);
+    updateCart();
   };
 
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
       setQuantity(quantity + 1);
+      updateCart();
     } else if (quantity > 0) {
       setQuantity(quantity - 1);
+      updateCart();
     }
   };
 
