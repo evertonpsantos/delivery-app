@@ -11,12 +11,12 @@ function NavBar() {
     console.log('storage excluido');
   };
 
-  // const getUserName = () => {
-  //   const userName = JSON.parse(localStorage.getItem('user')) || '';
-  //   if (userName) {
-  //     return userName.name;
-  //   }
-  // };
+  const getUserName = () => {
+    const userName = JSON.parse(localStorage.getItem('user')) || '';
+    if (userName) {
+      return userName.name;
+    }
+  };
   return (
     <nav className="navbar">
       <div className="left_side">
@@ -48,8 +48,7 @@ function NavBar() {
           className="navbar_nome"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          {/* { getUserName() } */}
-          Nome Aqui
+          { getUserName() }
         </div>
 
         <div className="navbar_sair">

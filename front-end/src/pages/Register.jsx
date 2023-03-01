@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/registerPage.css';
 import { useHistory } from 'react-router-dom';
+import LoginContext from '../context/LoginContext';
 
 function Register() {
+  const { setUser } = useContext(LoginContext);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,11 +40,14 @@ function Register() {
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         'Access-Control-Allow-Origin': '*',
       });
+      const json = await responseFetch.json();
       if (responseFetch.status === STATUS409) {
-        const json = await responseFetch.json();
         throw new Error(json.message);
       }
       history.push('/customer/products');
+      setUser(json);
+      console.log('🚀 ~ file: Register.jsx:49 ~ register ~ registerData:', registerData);
+      localStorage.setItem('user', JSON.stringify(json));
     } catch (error) {
       setErro(error.message);
       setIsHidden(false);

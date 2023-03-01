@@ -4,7 +4,9 @@ import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
 
 function Login() {
-  const { email, setEmail, password, setPassword, setUser } = useContext(LoginContext);
+  const { email, setEmail, password, setPassword,
+    setUser, user } = useContext(LoginContext);
+
   const [invalidUser, setInvalidUser] = useState(false);
   const history = useHistory();
 
@@ -33,12 +35,13 @@ function Login() {
       break;
     case 'customer':
       history.push('/customer/products');
+      localStorage.setItem('user', JSON.stringify(user));
       break;
     default:
       break;
     }
-    localStorage.setItem('user', JSON.stringify(loginData));
     history.push('/customer/products');
+    localStorage.setItem('user', JSON.stringify(jsonResult));
   };
 
   function toRegister() {
