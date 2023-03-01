@@ -39,6 +39,10 @@ function Login() {
     }
   };
 
+  function toRegister() {
+    history.push('/register');
+  }
+
   return (
     <div>
       <form>
@@ -75,7 +79,11 @@ function Login() {
           Login
         </button>
 
-        <button type="button" data-testid="common_login__button-register">
+        <button
+          onClick={ toRegister }
+          type="button"
+          data-testid="common_login__button-register"
+        >
           Ainda não tenho conta
         </button>
 
