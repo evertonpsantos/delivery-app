@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/registerPage.css';
+import { useHistory } from 'react-router-dom';
 
 function Register() {
   const [name, setName] = useState('');
@@ -9,9 +10,11 @@ function Register() {
   const [erro, setErro] = useState('');
   const [button, setButton] = useState(true);
 
+  const history = useHistory();
   const NAME_LENGTH = 12;
   const VERIFY_EMAIL = (testEmail) => /\S+@\S+\.\S+/.test(testEmail);
   const PASSWORD_LENGTH = 6;
+  const STATUS409 = 409;
 
   useEffect(() => {
     if (name.length < NAME_LENGTH) {
@@ -21,14 +24,31 @@ function Register() {
     } else if (password.length < PASSWORD_LENGTH) {
       setErro('Senha menor que 6 dígitos');
     } else {
-      setIsHidden(true);
       setButton(false);
     }
   }, [name, email, password]);
 
-  function register() {
-    e.preventDefault();
+  async function register() {
+    const registerData = { name, email, password };
+
+    try {
+      const responseFetch = await fetch('http://localhost:3001/register', {
+        method: 'POST',
+        body: JSON.stringify(registerData),
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        'Access-Control-Allow-Origin': '*',
+      });
+      if (responseFetch.status === STATUS409) {
+        const json = await responseFetch.json();
+        throw new Error(json.message);
+      }
+      history.push('/customer/products');
+    } catch (error) {
+      setErro(error.message);
+      setIsHidden(false);
+    }
   }
+
   return (
     <main>
       <div className="container">
@@ -61,14 +81,20 @@ function Register() {
           <button
             className="button"
             type="button"
-            data-testid="common_register__input-register"
+            data-testid="common_register__button-register"
             onClick={ register }
             disabled={ button }
           >
             CADASTRAR
           </button>
         </form>
-        <p className="erro" hidden={ isHidden }>{ erro }</p>
+        <p
+          data-testid="common_register__element-invalid_register"
+          className="erro"
+          hidden={ isHidden }
+        >
+          { erro }
+        </p>
       </div>
     </main>
   );
