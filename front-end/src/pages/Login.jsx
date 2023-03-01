@@ -37,6 +37,8 @@ function Login() {
     default:
       break;
     }
+    localStorage.setItem('user', JSON.stringify(loginData));
+    history.push('/customer/products');
   };
 
   return (
