@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
-import LoginContext from '../context/LoginContext';
+import React from 'react';
+// import LoginContext from '../context/LoginContext';
 import '../styles/navBarCustomer.css';
 
 function NavBar() {
-  const { user } = useContext(LoginContext);
-  console.log(user);
+  // const { user } = useContext(LoginContext);
 
   const logout = () => {
     localStorage.removeItem('user');
-    console.log('storage excluido');
   };
 
   const getUserName = () => {
