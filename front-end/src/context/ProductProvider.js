@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import ProductContext from './ProductContext';
 
@@ -14,6 +14,15 @@ function ProviderProduct({ children }) {
     localStorage.getItem('total') || 0,
   ));
 
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0.00);
+
+  useEffect(() => {
+    const totalPrice = cart
+      .reduce((acc, curr) => (Number(curr.price) * Number(curr.quantity)) + acc, 0);
+    setTotal(totalPrice.toFixed(2));
+  }, [cart]);
+
   const contextValue = useMemo(() => ({
     products,
     setProducts,
@@ -23,6 +32,10 @@ function ProviderProduct({ children }) {
     setProductsToCart,
     totalProducts,
     setTotalProducts,
+    cart,
+    setCart,
+    total,
+    setTotal,
   }));
 
   return (
