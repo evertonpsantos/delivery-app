@@ -4,7 +4,9 @@ import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
 
 function Login() {
-  const { email, setEmail, password, setPassword, setUser } = useContext(LoginContext);
+  const { email, setEmail, password, setPassword,
+    setUser, user } = useContext(LoginContext);
+
   const [invalidUser, setInvalidUser] = useState(false);
   const history = useHistory();
 
@@ -33,11 +35,18 @@ function Login() {
       break;
     case 'customer':
       history.push('/customer/products');
+      localStorage.setItem('user', JSON.stringify(user));
       break;
     default:
       break;
     }
+    history.push('/customer/products');
+    localStorage.setItem('user', JSON.stringify(jsonResult));
   };
+
+  function toRegister() {
+    history.push('/register');
+  }
 
   return (
     <div>
@@ -75,7 +84,11 @@ function Login() {
           Login
         </button>
 
-        <button type="button" data-testid="common_login__button-register">
+        <button
+          onClick={ toRegister }
+          type="button"
+          data-testid="common_login__button-register"
+        >
           Ainda não tenho conta
         </button>
 
