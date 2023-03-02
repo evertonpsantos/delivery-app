@@ -9,13 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      urlImage: {
-        type: Sequelize.STRING
+      url_image: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
     });
   },

@@ -8,12 +8,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    urlImage: DataTypes.STRING
+    name: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.INTEGER, allowNull: false },
+    urlImage: { type: DataTypes.STRING, allowNull: false },
     }, {
     modelName: 'Product',
-    underscored: true,
     timestamps: false,
     tableName: 'products',
   });
