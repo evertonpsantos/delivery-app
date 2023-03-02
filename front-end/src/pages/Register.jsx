@@ -46,7 +46,6 @@ function Register() {
       }
       history.push('/customer/products');
       setUser(json);
-      console.log('🚀 ~ file: Register.jsx:49 ~ register ~ registerData:', registerData);
       localStorage.setItem('user', JSON.stringify(json));
     } catch (error) {
       setErro(error.message);

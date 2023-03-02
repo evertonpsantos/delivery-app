@@ -1,23 +1,20 @@
 const jwt = require('jsonwebtoken');
-const path = require('path');
-const fs = require('fs').promises;
+const fs = require('fs');
 require('dotenv').config();
 
 const config = {
   algorithm: 'HS256',
-  noTimestamp: true
+  noTimestamp: true,
 };
 
-const secretPath = path.resolve(__dirname, '..', '..', 'jwt.evaluation.key');
+const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
 
-const newToken = async ({name, email, role}) => {
-  const secret = (await fs.readFile(secretPath, 'utf-8')).trim();
-  console.log(secret);
-  return jwt.sign({name, email, role}, secret, config);
+const newToken = ({ name, email, role }) => {
+  const tokenCreate = jwt.sign({ name, email, role }, secret, config);
+  return tokenCreate;
 };
 
-const verifyToken = async (token) => {
-  const secret = await fs.readFile(secretPath, 'utf-8');
+const verifyToken = (token) => {
   return jwt.verify(token, secret);
 };
 

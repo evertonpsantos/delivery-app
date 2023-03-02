@@ -14,14 +14,12 @@ async function registerUser(dataNewUser) {
       const findUserEmail = await User.findOne({ where: { email } });
       if (findUserEmail) throw new Error('This email is already registered');
 
-     
-
       const createUser = await User.create({ name, email, password: md, role: 'customer' });
       if (!createUser) throw new Error('Not possible to register this user');
 
-      const dadosToken = {name, email, role: 'customer'}
-      const token = await newToken(dadosToken)
-      const userNewToken = { name, email, role: 'customer', token }
+      const dadosToken = { name, email, role: 'customer' };
+      const token = newToken(dadosToken);
+      const userNewToken = { name, email, role: 'customer', token };
 
       return userNewToken;
     } catch (error) {

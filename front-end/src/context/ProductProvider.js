@@ -4,6 +4,11 @@ import ProductContext from './ProductContext';
 
 const initialStateProducts = () => ([]);
 
+const DEFAULT_CART = {
+  totalValue: 0.00,
+  products: [],
+};
+
 function ProviderProduct({ children }) {
   const [valuesProducts, setValuesProducts] = useState(initialStateProducts);
   const [products, setProducts] = useState();
@@ -13,6 +18,8 @@ function ProviderProduct({ children }) {
   const [totalProducts, setTotalProducts] = useState(JSON.parse(
     localStorage.getItem('total') || 0,
   ));
+  const [cart, setCart] = useState(DEFAULT_CART);
+  const [totalGeral, setTotalGeral] = useState(0);
 
   const contextValue = useMemo(() => ({
     products,
@@ -23,6 +30,10 @@ function ProviderProduct({ children }) {
     setProductsToCart,
     totalProducts,
     setTotalProducts,
+    cart,
+    setCart,
+    totalGeral,
+    setTotalGeral,
   }));
 
   return (

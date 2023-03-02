@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import contextProduct from '../context/ProductContext';
 
@@ -7,8 +8,10 @@ const listProducts = (products) => products.map((product, key) => (
 ));
 
 function ProductList() {
-  const { valuesProducts, setValuesProducts } = useContext(contextProduct);
-  console.log(valuesProducts);
+  const history = useHistory();
+  const { valuesProducts, setValuesProducts, cart } = useContext(contextProduct);
+  const { totalValue } = cart;
+  const valorDoFront = totalValue.toFixed(2).toString().replace('.', ',');
 
   useEffect(() => {
     async function fetchData() {
@@ -20,13 +23,22 @@ function ProductList() {
     fetchData();
   }, []);
 
+  const handleCheckout = () => {
+    localStorage.setItem('carrinho', JSON.stringify(cart));
+    history.push('/customer/checkout');
+  };
+
   return (
     <>
       { valuesProducts
         ? <form>{ listProducts(valuesProducts) }</form> : <h1>Loading...</h1> }
-      <button type="button">
-        Ver Carrinho:
-        {/* {`Ver Carrinho: ${total.toFixed(2)}`} */}
+      <p>Ver Carrinho</p>
+      <button
+        type="button"
+        data-testid="customer_products__checkout-bottom-value"
+        onClick={ handleCheckout }
+      >
+        { valorDoFront }
       </button>
     </>
   );
