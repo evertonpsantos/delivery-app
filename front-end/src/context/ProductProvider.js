@@ -7,12 +7,6 @@ const initialStateProducts = () => ([]);
 function ProviderProduct({ children }) {
   const [valuesProducts, setValuesProducts] = useState(initialStateProducts);
   const [products, setProducts] = useState();
-  const [productsToCart, setProductsToCart] = useState(
-    JSON.parse(localStorage.getItem('carrinho')),
-  );
-  const [totalProducts, setTotalProducts] = useState(JSON.parse(
-    localStorage.getItem('total') || 0,
-  ));
 
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0.00);
@@ -28,10 +22,6 @@ function ProviderProduct({ children }) {
     setProducts,
     setValuesProducts,
     valuesProducts,
-    productsToCart,
-    setProductsToCart,
-    totalProducts,
-    setTotalProducts,
     cart,
     setCart,
     total,
