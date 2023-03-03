@@ -9,8 +9,8 @@ const config = {
 
 const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
 
-const newToken = ({ name, email, role }) => {
-  const tokenCreate = jwt.sign({ name, email, role }, secret, config);
+const newToken = ({ id, name, email, role }) => {
+  const tokenCreate = jwt.sign({ id, name, email, role }, secret, config);
   return tokenCreate;
 };
 
