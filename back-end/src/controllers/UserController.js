@@ -1,4 +1,4 @@
-const { loginService } = require('../services/UserService');
+const { loginService, getAllSellers } = require('../services/UserService');
 const { newToken } = require('../utils/jwtFunction');
 
 const login = async (req, res) => {
@@ -12,4 +12,9 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { login };
+const getSellers = async (_req, res) => {
+  const result = await getAllSellers();
+  return res.status(200).json(result);
+}
+
+module.exports = { login, getSellers };
