@@ -29,7 +29,7 @@ module.exports = {
         field: 'seller_id'
       },
       total_price: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(9, 2),
         field: 'total_price'
       },
       delivery_address: {
