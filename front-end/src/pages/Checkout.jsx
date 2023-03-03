@@ -10,7 +10,8 @@ export default function Checkout() {
   const [sellers, setSellers] = useState([]);
   const [sellerChosenId, setSellerChosenId] = useState(null);
 
-  const cartItems = JSON.parse(localStorage.getItem('carrinho'));
+  const cartItems = JSON.parse(localStorage.getItem('carrinho'))
+    .filter(({ quantity }) => quantity !== 0);
   const history = useHistory();
 
   useEffect(() => {
@@ -33,11 +34,7 @@ export default function Checkout() {
   };
 
   const handleOrder = async () => {
-    // const user = JSON.parse(localStorage.getItem('user'));
-    const user = {
-      id: 1,
-      token: 'BLAJBLJBA.BALNAJJALNL.BAABLABLA',
-    };
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const saleInfo = {
       userId: Number(user.id),
@@ -109,14 +106,14 @@ export default function Checkout() {
                       `customer_checkout__element-order-table-unit-price-${index}`
                     }
                   >
-                    {item.price}
+                    {String(item.price).replace('.', ',')}
                   </td>
                   <td
                     data-testid={
                       `customer_checkout__element-order-table-sub-total-${index}`
                     }
                   >
-                    {(item.quantity * item.price).toFixed(2)}
+                    {String((item.quantity * item.price).toFixed(2)).replace('.', ',')}
                   </td>
                   <td
                     data-testid={
