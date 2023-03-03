@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: {type: DataTypes.INTEGER, allowNull: false },
     deliveryAddress:{type: DataTypes.STRING, allowNull: false },
     deliveryNumber: {type: DataTypes.STRING, allowNull: false },
-    saleDate: { type: DataTypes.DATE },
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: { type: DataTypes.STRING }
   }, {
     modelName: 'Sale',

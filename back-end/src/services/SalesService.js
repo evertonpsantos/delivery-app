@@ -2,7 +2,7 @@ const { Sale, SalesProducts } = require('../database/models');
 
 const registerNewSale = async (saleInfo) => {
   const newSale = await Sale
-    .create({ ...saleInfo, saleDate: new Date(), status: 'Pendente' });
+    .create({ ...saleInfo, status: 'Pendente' });
   await Promise.all(saleInfo.cartItems
     .map((item) => SalesProducts
       .create({ saleId: newSale.id, productId: item.id, quantity: item.quantity })));
