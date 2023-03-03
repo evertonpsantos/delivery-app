@@ -14,9 +14,7 @@ const newToken = ({ name, email, role }) => {
   return tokenCreate;
 };
 
-const verifyToken = (token) => {
-  return jwt.verify(token, secret);
-};
+const verifyToken = (token) => jwt.verify(token, secret);
 
 module.exports = {
   newToken,

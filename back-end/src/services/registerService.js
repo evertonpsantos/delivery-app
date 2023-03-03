@@ -17,9 +17,9 @@ async function registerUser(dataNewUser) {
       const createUser = await User.create({ name, email, password: md, role: 'customer' });
       if (!createUser) throw new Error('Not possible to register this user');
 
-      const dadosToken = {name, email, role: 'customer'}
-      const token = newToken(dadosToken)
-      const userNewToken = { name, email, role: 'customer', token }
+      const dadosToken = { name, email, role: 'customer' };
+      const token = newToken(dadosToken);
+      const userNewToken = { name, email, role: 'customer', token };
 
       return userNewToken;
     } catch (error) {

@@ -1,18 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const registerRouter = require('../routes/register.routes');
 const loginRouter = require('../routes/LoginRouter');
 const productRouter = require('../routes/ProductRouter');
 const salesRouter = require('../routes/SaleRouter');
-const path = require('path');
-
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 app.use('/images', express.static(path.resolve(__dirname, '../../images')));
-
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', loginRouter);
