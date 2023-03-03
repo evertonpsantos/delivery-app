@@ -1,4 +1,4 @@
-const { registerNewSale, getAllSales } = require("../services/SalesService");
+const { registerNewSale, getAllSales } = require('../services/SalesService');
 
 const registerSale = async (req, res) => {
     const result = await registerNewSale(req.body);
@@ -8,6 +8,6 @@ const registerSale = async (req, res) => {
 const getSales = async (req, res) => {
   const result = await getAllSales();
   return res.status(200).json(result);
-}
+};
 
 module.exports = { registerSale, getSales };

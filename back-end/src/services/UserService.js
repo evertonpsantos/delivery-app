@@ -16,8 +16,8 @@ const loginService = async ({ email, password }) => {
 };
 
 const getAllSellers = async () => {
-  const sellers = await User.findAll({ where: { role: 'seller' }});
+  const sellers = await User.findAll({ where: { role: 'seller' } });
   return sellers;
-}
+};
 
 module.exports = { loginService, getAllSellers };

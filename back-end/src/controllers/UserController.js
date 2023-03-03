@@ -15,6 +15,6 @@ const login = async (req, res) => {
 const getSellers = async (_req, res) => {
   const result = await getAllSellers();
   return res.status(200).json(result);
-}
+};
 
 module.exports = { login, getSellers };
