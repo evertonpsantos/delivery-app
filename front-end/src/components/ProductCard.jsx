@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import '../styles/cardCustomesProducts.css';
 import ContextProduct from '../context/ProductContext';
@@ -17,18 +17,19 @@ function ProductCard({ productInfo }) {
     setCart(newCart);
   };
 
-  const onChangeHandler = (event) => {
-    setQuantity(event.target.value);
+  useEffect(() => {
     updateCart();
+  }, [quantity]);
+
+  const onChangeHandler = ({ target }) => {
+    setQuantity(target.value);
   };
 
   const onClickHandler = (event) => {
     if (event.target.name === 'add-item') {
-      setQuantity(quantity + 1);
-      updateCart();
+      setQuantity(Number(quantity) + 1);
     } else if (quantity > 0) {
-      setQuantity(quantity - 1);
-      updateCart();
+      setQuantity(Number(quantity) - 1);
     }
   };
 
@@ -67,7 +68,7 @@ function ProductCard({ productInfo }) {
             +
           </button>
           <input
-            type="number"
+            type="text"
             data-testid={ `customer_products__input-card-quantity-${id}` }
             placeholder="0"
             id="quantity"

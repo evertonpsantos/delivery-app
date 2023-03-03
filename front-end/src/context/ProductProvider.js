@@ -9,7 +9,7 @@ function ProviderProduct({ children }) {
   const [products, setProducts] = useState();
 
   const [cart, setCart] = useState([]);
-  const [total, setTotal] = useState(0.00);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const totalPrice = cart

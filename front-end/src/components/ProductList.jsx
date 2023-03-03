@@ -32,9 +32,16 @@ function ProductList() {
         ? <form>{ listProducts(valuesProducts) }</form> : <h1>Loading...</h1> }
       <button
         type="button"
+        data-testid="customer_products__button-cart"
         onClick={ handleClick }
+        disabled={ total <= 0.00 }
       >
-        {`Ver Carrinho: ${total}`}
+        <p
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {`Ver Carrinho: ${total}`}
+        </p>
+
       </button>
     </>
   );
