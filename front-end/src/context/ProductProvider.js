@@ -14,7 +14,7 @@ function ProviderProduct({ children }) {
   useEffect(() => {
     const totalPrice = cart
       .reduce((acc, curr) => (Number(curr.price) * Number(curr.quantity)) + acc, 0);
-    setTotal(totalPrice.toFixed(2));
+    setTotal(Number(totalPrice).toFixed(2));
   }, [cart]);
 
   const contextValue = useMemo(() => ({

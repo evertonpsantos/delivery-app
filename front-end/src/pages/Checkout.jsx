@@ -138,8 +138,9 @@ export default function Checkout() {
           <p
             data-testid="customer_checkout__element-order-total-price"
           >
-            {`Total: ${cartItems
-              .reduce((acc, curr) => (curr.price * curr.quantity) + acc, 0)}`}
+            {`Total: ${String(cartItems
+              .reduce((acc, curr) => (curr.price * curr.quantity) + acc, 0))
+              .replace('.', ',')}`}
           </p>
 
           <div>
@@ -175,7 +176,7 @@ export default function Checkout() {
               <input
                 type="text"
                 name="input-number"
-                data-testid="customer_checkout__input-number"
+                data-testid="customer_checkout__input-address-number"
                 value={ addressNumber }
                 onChange={ ({ target: { value } }) => setAddressNumber(value) }
               />

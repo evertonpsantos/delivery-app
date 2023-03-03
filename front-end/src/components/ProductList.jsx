@@ -13,7 +13,6 @@ function ProductList() {
 
   useEffect(() => {
     async function fetchData() {
-    // const token = JSON.parse(localStorage.getItem('token'));
       const result = await fetch('http://localhost:3001/products');
       const resultJson = await result.json();
       setValuesProducts(resultJson);
@@ -36,10 +35,11 @@ function ProductList() {
         onClick={ handleClick }
         disabled={ total <= 0.00 }
       >
+        Ver Carrinho:
         <p
           data-testid="customer_products__checkout-bottom-value"
         >
-          {`Ver Carrinho: ${total}`}
+          { String(total).replace('.', ',') }
         </p>
 
       </button>
