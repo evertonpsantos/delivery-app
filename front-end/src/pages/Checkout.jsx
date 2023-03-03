@@ -1,11 +1,29 @@
-import { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useContext, useState, useEffect } from 'react';
 import Navbar from '../components/NavBar';
 import ContextProduct from '../context/ProductContext';
 
 export default function Checkout() {
   const { setCart } = useContext(ContextProduct);
+  const [address, setAddress] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
+  const [sellers, setSellers] = useState([]);
+  const [sellerChosenId, setSellerChosenId] = useState(null);
 
   const cartItems = JSON.parse(localStorage.getItem('carrinho'));
+  const history = useHistory();
+
+  useEffect(() => {
+    const fetchSellers = async () => {
+      const sellersFound = await fetch('http://localhost:3001/login/sellers');
+      const resJson = await sellersFound.json();
+
+      setSellers(resJson);
+      setSellerChosenId(resJson[0].id);
+    };
+
+    fetchSellers();
+  }, []);
 
   const removeItem = (id) => {
     const findElement = cartItems.find((item) => item.id === id);
@@ -14,11 +32,38 @@ export default function Checkout() {
     setCart(filtereredList);
   };
 
+  const handleOrder = async () => {
+    // const user = JSON.parse(localStorage.getItem('user'));
+    const user = {
+      id: 1,
+    };
+
+    const saleInfo = {
+      userId: Number(user.id),
+      sellerId: Number(sellerChosenId),
+      totalPrice: Number(cartItems
+        .reduce((acc, curr) => (curr.price * curr.quantity) + acc, 0)),
+      deliveryAddress: address,
+      deliveryNumber: addressNumber,
+      cartItems,
+    };
+
+    const result = await fetch('http://localhost:3001/sales', {
+      method: 'POST',
+      body: JSON.stringify(saleInfo),
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      'Access-Control-Allow-Origin': '*',
+    });
+    const resultToJson = await result.json();
+
+    history.push(`/customer/orders/${resultToJson.id}`);
+  };
+
   return (
     <div>
+      <Navbar />
       {cartItems.length === 0 ? <p>Não há items ainda</p> : (
         <div>
-          <Navbar />
           <p>Finalizar Pedido</p>
           <table style={ { marginTop: '100px' } }>
             <thead>
@@ -100,9 +145,12 @@ export default function Checkout() {
               <select
                 name="seller-select"
                 data-testid="customer_checkout__select-seller"
+                onChange={ ({ target: { value } }) => setSellerChosenId(value) }
+                value={ sellerChosenId }
               >
-                P. Vendedora Responsavel:
-                <option>Fulana de Tal</option>
+                { sellers.map((seller) => (
+                  <option key={ seller.name } value={ seller.id }>{seller.name}</option>
+                ))}
               </select>
             </label>
 
@@ -112,6 +160,8 @@ export default function Checkout() {
                 type="text"
                 name="input-address"
                 data-testid="customer_checkout__input-address"
+                value={ address }
+                onChange={ ({ target: { value } }) => setAddress(value) }
               />
             </label>
 
@@ -121,12 +171,15 @@ export default function Checkout() {
                 type="text"
                 name="input-number"
                 data-testid="customer_checkout__input-number"
+                value={ addressNumber }
+                onChange={ ({ target: { value } }) => setAddressNumber(value) }
               />
             </label>
 
             <button
               type="button"
               data-testid="customer_checkout__button-submit-order"
+              onClick={ handleOrder }
             >
               Finalizar Pedido
             </button>
