@@ -40,7 +40,7 @@ function ProductCard({ productInfo }) {
           className="card_price"
           data-testid={ `customer_products__element-card-price-${id}` }
         >
-          { price }
+          { String(price).replace('.', ',') }
         </div>
 
         <img

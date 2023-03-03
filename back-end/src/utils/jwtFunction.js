@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const config = {
   algorithm: 'HS256',
-  noTimestamp: true,,
+  noTimestamp: true,
 };
 
 const secret = fs.readFileSync('./jwt.evaluation.key', 'utf-8');
