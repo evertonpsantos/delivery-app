@@ -2,7 +2,7 @@ const { registerNewSale, getAllSales } = require('../services/SalesService');
 
 const registerSale = async (req, res) => {
     const result = await registerNewSale(req.body);
-    return res.status(200).json(result);
+    return res.status(201).json(result);
 };
 
 const getSales = async (req, res) => {
