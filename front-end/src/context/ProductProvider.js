@@ -7,7 +7,7 @@ const initialStateProducts = () => ([]);
 function ProviderProduct({ children }) {
   const [valuesProducts, setValuesProducts] = useState(initialStateProducts);
   const [products, setProducts] = useState();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('carrinho')) || []);
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
