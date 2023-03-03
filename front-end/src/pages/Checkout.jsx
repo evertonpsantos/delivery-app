@@ -36,6 +36,7 @@ export default function Checkout() {
     // const user = JSON.parse(localStorage.getItem('user'));
     const user = {
       id: 1,
+      token: 'BLAJBLJBA.BALNAJJALNL.BAABLABLA',
     };
 
     const saleInfo = {
@@ -51,7 +52,11 @@ export default function Checkout() {
     const result = await fetch('http://localhost:3001/sales', {
       method: 'POST',
       body: JSON.stringify(saleInfo),
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: user.token,
+      },
       'Access-Control-Allow-Origin': '*',
     });
     const resultToJson = await result.json();
