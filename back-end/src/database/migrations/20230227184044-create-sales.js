@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -16,8 +16,9 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        field: 'user_id'
       },
-      sellerId: {
+      seller_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'users',
@@ -25,21 +26,26 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        field: 'seller_id'
       },
-      totalPrice: {
-        type: Sequelize.INTEGER
+      total_price: {
+        type: Sequelize.DECIMAL(9, 2),
+        field: 'total_price'
       },
-      deliveryAddress: {
-        type: Sequelize.STRING
+      delivery_address: {
+        type: Sequelize.STRING,
+        field: 'delivery_address'
       },
-      deliveryNumber: {
-        type: Sequelize.STRING
+      delivery_number: {
+        type: Sequelize.STRING,
+        field: 'delivery_number'
       },
-      saleDate: {
-        type: Sequelize.DATE
+      sale_date: {
+        type: Sequelize.DATE,
+        field: 'sale_date'
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
     });
   },
