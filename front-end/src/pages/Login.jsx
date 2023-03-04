@@ -34,14 +34,14 @@ function Login() {
       history.push('/seller');
       break;
     case 'customer':
-      history.push('/customer/products');
       localStorage.setItem('user', JSON.stringify(user));
+      history.push('/customer/products');
       break;
     default:
       break;
     }
-    history.push('/customer/products');
     localStorage.setItem('user', JSON.stringify(jsonResult));
+    history.push('/customer/products');
   };
 
   function toRegister() {

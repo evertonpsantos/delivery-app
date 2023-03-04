@@ -44,9 +44,9 @@ function Register() {
       if (responseFetch.status === STATUS409) {
         throw new Error(json.message);
       }
+      localStorage.setItem('user', JSON.stringify(json));
       history.push('/customer/products');
       setUser(json);
-      localStorage.setItem('user', JSON.stringify(json));
     } catch (error) {
       setErro(error.message);
       setIsHidden(false);
