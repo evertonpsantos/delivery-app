@@ -6,7 +6,6 @@ import '../styles/orderDetails.css';
 
 function OrderDetails() {
   const [orders, setOrders] = useState([]);
-  const [totalValue, setTotalValue] = useState('');
 
   const { id } = useParams();
 
@@ -21,13 +20,13 @@ function OrderDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
-    let value = 0;
-    orders.forEach((order) => {
-      value += order.totalPrice;
-    });
-    setTotalValue(`R$ ${value}`);
-  }, [orders]);
+  // useEffect(() => {
+  //   let value = 0;
+  //   orders.forEach((order) => {
+  //     value += order.totalPrice;
+  //   });
+  //   setTotalValue(`R$ ${value}`);
+  // }, [orders]);
 
   if (orders.length < 1) return <div>Loading...</div>;
 
@@ -105,7 +104,7 @@ function OrderDetails() {
                   `seller_order_details__element-order-table-sub-total-${index}`
                 }
               >
-                { `R$ ${order.totalPrice}` }
+                { `R$ ${order.quantity * order.price}` }
               </td>
             </tr>
           )) }
@@ -114,7 +113,7 @@ function OrderDetails() {
       <div
         data-testid="seller_order_details__element-order-total-price"
       >
-        { totalValue }
+        { orders[0].totalPrice }
       </div>
     </main>
   );
