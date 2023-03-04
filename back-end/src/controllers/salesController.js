@@ -1,8 +1,9 @@
 const salesService = require('../services/salesService');
 
-async function findAll(_req, res) {
+async function findAll(req, res) {
+  const { id } = req.params;
   try {
-    const result = await salesService.findAll();
+    const result = await salesService.findUserSales(id);
 
     return res.status(200).json(result);
   } catch (error) {

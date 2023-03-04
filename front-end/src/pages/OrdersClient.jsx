@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import '../styles/myOrdersPage.css';
+import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
 
 export default function OrdersClient() {
   const [myOrders, setMyOrders] = useState([]);
 
-  const NUMBER10 = 10;
-  const NUMBER4 = 4;
-  const NUMBER5 = 5;
-  const NUMBER7 = 7;
-  const NUMBER8 = 8;
-
-  function fixSaleDate(arr) {
-    const mappedArray = arr.map((e) => {
-      const date = e.saleDate.toString();
-      const sliceDate = date.slice(0, NUMBER10);
-      const year = sliceDate.slice(0, NUMBER4);
-      const month = sliceDate.slice(NUMBER5, NUMBER7);
-      const day = sliceDate.slice(NUMBER8, NUMBER10);
-
-      const stringDate = `${day}/${month}/${year}`;
-      return { ...e, saleDate: stringDate };
-    });
-    return mappedArray;
-  }
+  const history = useHistory();
+  const MOCKUSERID = 3;
 
   useEffect(() => {
     const getData = async () => {
-      const orders = await fetchData('http://localhost:3001/sales');
-      setMyOrders(fixSaleDate(orders));
+      const orders = await fetchData(`http://localhost:3001/sales/user/${MOCKUSERID}`);
+      setMyOrders(translateDatetimeToDate(orders));
     };
 
     getData();
   }, []);
 
+  function pushTo(id) {
+    history.push(`/customer/orders/${id}`);
+  }
+
   if (myOrders.length < 1) return <div>Loading...</div>;
 
   const orders = myOrders.map((order) => (
-    <section className="order-content" key={ order.id }>
+    <section
+      role="presentation"
+      onClick={ () => pushTo(order.id) }
+      className="order-content"
+      key={ order.id }
+    >
       <div
         data-testid={ `customer_orders__element-order-id-${order.id}` }
         className="number-order"
@@ -66,7 +60,7 @@ export default function OrdersClient() {
         data-testid={ `customer_orders__element-card-price-${order.id}` }
         className="total-price-order"
       >
-        { `$ ${}`order.totalPrice }
+        { `R$ ${order.totalPrice}` }
       </div>
     </section>
   ));
