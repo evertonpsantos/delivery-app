@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     name: { type: DataTypes.STRING, allowNull: false },
-    price: { type: DataTypes.INTEGER, allowNull: false },
-    urlImage: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.DECIMAL(3, 2), allowNull: false },
+    urlImage: { type: DataTypes.STRING, allowNull: false }
     }, {
     modelName: 'Product',
     timestamps: false,

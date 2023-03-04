@@ -17,6 +17,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        field: 'user_id'
       },
       seller_id: {
         allowNull: false,
@@ -27,21 +28,26 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+        field: 'seller_id'
       },
       total_price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(9, 2),
+        field: 'total_price'
       },
       delivery_address: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_address'
       },
       delivery_number: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        field: 'delivery_number'
       },
       sale_date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        field: 'sale_date'
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
     });
   },

@@ -8,7 +8,7 @@ async function registerUser(req, res) {
 
     if (result.message) throw new Error(result.message);
 
-    return res.status(201).json({ message: 'Created sucessfully' });
+    return res.status(201).json(result);
   } catch (error) {
     return res.status(409).json({ message: error.message });
   }
