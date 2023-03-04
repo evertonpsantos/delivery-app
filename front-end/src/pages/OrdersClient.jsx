@@ -3,20 +3,22 @@ import { useHistory } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import '../styles/myOrdersPage.css';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
+import NavBar from '../components/NavBar';
 
 export default function OrdersClient() {
   const [myOrders, setMyOrders] = useState([]);
 
   const history = useHistory();
-  const MOCKUSERID = 3;
+  const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     const getData = async () => {
-      const orders = await fetchData(`http://localhost:3001/sales/user/${MOCKUSERID}`);
+      const orders = await fetchData(`http://localhost:3001/sales/user/${user.id}`);
       setMyOrders(translateDatetimeToDate(orders));
     };
 
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function pushTo(id) {
@@ -67,6 +69,7 @@ export default function OrdersClient() {
 
   return (
     <main className="container-myorders">
+      <NavBar />
       { orders }
     </main>
   );

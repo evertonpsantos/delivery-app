@@ -1,6 +1,7 @@
 import React from 'react';
 // import LoginContext from '../context/LoginContext';
 import '../styles/navBarCustomer.css';
+import { Link } from 'react-router-dom';
 
 function NavBar() {
   // const { user } = useContext(LoginContext);
@@ -21,22 +22,22 @@ function NavBar() {
         <div
           className="navbar_produtos"
         >
-          <a
+          <Link
             data-testid="customer_products__element-navbar-link-products"
-            href="/customer/products"
+            to="/customer/products"
           >
             PRODUTOS
-          </a>
+          </Link>
         </div>
         <div
           className="navbar_pedidos"
         >
-          <a
+          <Link
             data-testid="customer_products__element-navbar-link-orders"
-            href="/customer/products"
+            to="/customer/orders"
           >
             MEUS PEDIDOS
-          </a>
+          </Link>
         </div>
 
       </div>
@@ -50,13 +51,13 @@ function NavBar() {
         </div>
 
         <div className="navbar_sair">
-          <a
-            href="/login"
+          <Link
+            to="/login"
             data-testid="customer_products__element-navbar-link-logout"
             onClick={ () => logout() }
           >
             Sair
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

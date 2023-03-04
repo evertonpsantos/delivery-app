@@ -1,6 +1,6 @@
 const { SalesProducts } = require('../database/models/index');
 const saleService = require('./salesService');
-const productsService = require('./productsService');
+const productsService = require('./ProductService');
 const transformToObject = require('../helpers/transformToObject');
 
 async function findSaleAndProduct(id) {
@@ -10,7 +10,7 @@ async function findSaleAndProduct(id) {
       });
 
       const dataSale = result.map(async ({ saleId, productId, quantity }) => {
-        const saleData = await saleService.findSale(saleId);
+        const saleData = await saleService.findWithItemsSale(saleId);
         const productData = await productsService.findProduct(productId);
 
         const obj = transformToObject(saleData, productData, quantity);

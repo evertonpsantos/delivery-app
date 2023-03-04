@@ -1,4 +1,4 @@
-const { Sale } = require('../database/models/index');
+const { Sale, SalesProducts } = require('../database/models/index');
 
 async function findUserSales(id) {
   try {
@@ -9,7 +9,7 @@ async function findUserSales(id) {
   }
 }
 
-async function findSale(id) {
+async function findWithItemsSale(id) {
     try {
       const result = await Sale.findOne({ where: { id },
         attributes: ['id', 'totalPrice', 'saleDate', 'status'] });
@@ -19,7 +19,24 @@ async function findSale(id) {
     }
 }
 
+const registerNewSale = async (saleInfo) => {
+  const newSale = await Sale
+    .create({ ...saleInfo, status: 'Pendente' });
+  await Promise.all(saleInfo.cartItems
+    .map((item) => SalesProducts
+      .create({ saleId: newSale.id, productId: item.id, quantity: item.quantity })));
+
+  return newSale;
+};
+
+const getAllSales = async () => {
+  const allSales = await Sale.findAll();
+  return allSales;
+};
+
 module.exports = {
   findUserSales,
-  findSale,
+  findWithItemsSale,
+  registerNewSale,
+  getAllSales,
 };

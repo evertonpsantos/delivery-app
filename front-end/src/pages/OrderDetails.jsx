@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
 import '../styles/orderDetails.css';
+import NavBar from '../components/NavBar';
 
 function OrderDetails() {
   const [orders, setOrders] = useState([]);
@@ -20,18 +21,11 @@ function OrderDetails() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // useEffect(() => {
-  //   let value = 0;
-  //   orders.forEach((order) => {
-  //     value += order.totalPrice;
-  //   });
-  //   setTotalValue(`R$ ${value}`);
-  // }, [orders]);
-
   if (orders.length < 1) return <div>Loading...</div>;
 
   return (
     <main className="main-order-details">
+      <NavBar />
       <h2>Detalhes do pedido</h2>
       <div>
         <div
@@ -104,7 +98,7 @@ function OrderDetails() {
                   `seller_order_details__element-order-table-sub-total-${index}`
                 }
               >
-                { `R$ ${order.quantity * order.price}` }
+                { `R$ ${(order.quantity) * order.price}` }
               </td>
             </tr>
           )) }
