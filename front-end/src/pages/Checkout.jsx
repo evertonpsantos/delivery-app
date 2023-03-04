@@ -4,7 +4,7 @@ import Navbar from '../components/NavBar';
 import ContextProduct from '../context/ProductContext';
 
 export default function Checkout() {
-  const { setCart } = useContext(ContextProduct);
+  const { setCart, total } = useContext(ContextProduct);
   const [address, setAddress] = useState('');
   const [addressNumber, setAddressNumber] = useState('');
   const [sellers, setSellers] = useState([]);
@@ -27,7 +27,7 @@ export default function Checkout() {
   }, []);
 
   const removeItem = (id) => {
-    const findElement = cartItems.find((item) => item.id === id);
+    const findElement = cartItems.find((item) => item.id === Number(id));
     const filtereredList = cartItems.filter((item) => item !== findElement);
     localStorage.setItem('carrinho', JSON.stringify(filtereredList));
     setCart(filtereredList);
@@ -135,9 +135,7 @@ export default function Checkout() {
           <p
             data-testid="customer_checkout__element-order-total-price"
           >
-            {`Total: ${String(cartItems
-              .reduce((acc, curr) => (curr.price * curr.quantity) + acc, 0))
-              .replace('.', ',')}`}
+            {`${String(total).replace('.', ',')}`}
           </p>
 
           <div>

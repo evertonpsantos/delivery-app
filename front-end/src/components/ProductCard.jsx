@@ -9,6 +9,7 @@ function ProductCard({ productInfo }) {
   const { cart, setCart } = useContext(ContextProduct);
 
   const updateCart = () => {
+    if (quantity === 0) return;
     const newCart = [...cart];
     const isInTheCart = cart.find((item) => item.name === name);
     if (!isInTheCart) return setCart([...cart, { name, price, id, quantity }]);
