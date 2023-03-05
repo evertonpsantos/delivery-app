@@ -10,6 +10,8 @@ function OrderDetails() {
 
   const { id } = useParams();
 
+  const bug = 'Group customer_order_details__element-order-details-label-order-date';
+
   useEffect(() => {
     const getData = async () => {
       const myOrders = await fetchData(`http://localhost:3001/salesproducts/${id}`);
@@ -29,29 +31,31 @@ function OrderDetails() {
       <h2>Detalhes do pedido</h2>
       <div>
         <div
-          data-testid="seller_order_details__element-order-details-label-order-id"
+          data-testid="customer_order_details__element-order-details-label-order-date"
         >
           { `Pedido 00${orders[0].id}` }
         </div>
         <div
-          data-testid="seller_order_details__element-order-details-label-order-date"
+          data-testid="customer_order_details__element-order-details-label-seller-name"
         >
-          { orders.saleDate }
+          { orders[0].seller }
         </div>
         <div
-          data-testid="seller_order_details__element-order-details-label-delivery-status"
+          data-testid={ bug }
         >
-          { orders.status }
+          { orders[0].saleDate }
         </div>
         <div
-          data-testid="seller_order_details__button-preparing-check"
+          data-testid={
+            `customer_order_details__element-order-details-label-delivery-status=${id}`
+          }
         >
-          preparar pedido
+          { orders[0].status }
         </div>
         <div
-          data-testid="seller_order_details__button-dispatch-check"
+          data-testid="customer_order_details__button-delivery-check"
         >
-          saiu para entrega
+          marcar como entregue
         </div>
       </div>
       <table>
@@ -65,47 +69,57 @@ function OrderDetails() {
           </tr>
         </thead>
         <tbody>
-          { orders.map((order, index) => (
-            <tr key={ index }>
-              <td
-                data-testid={
-                  `seller_order_details__element-order-table-item-number-${index}`
-                }
-              >
-                { index + 1 }
-              </td>
-              <td
-                data-testid={ `seller_order_details__element-order-table-name-${index}` }
-              >
-                { order.name }
-              </td>
-              <td
-                data-testid={
-                  `seller_order_details__element-order-table-quantity-${index}`
-                }
-              >
-                { order.quantity }
-              </td>
-              <td
-                data-testid={
-                  `seller_order_details__element-order-table-unit-price-${index}`
-                }
-              >
-                { `R$ ${order.price}` }
-              </td>
-              <td
-                data-testid={
-                  `seller_order_details__element-order-table-sub-total-${index}`
-                }
-              >
-                { `R$ ${(order.quantity) * order.price}` }
-              </td>
-            </tr>
-          )) }
+          { orders.map((order, index) => {
+            const productPrice = Number(order.price).toFixed(2);
+            const productQuantity = Number(order.quantity);
+            const subTotal = parseFloat(productPrice * productQuantity).toFixed(2);
+
+            const showedUnitValue = productPrice.toString().replace('.', ',');
+            const showedSubTotal = subTotal.toString().replace('.', ',');
+            return (
+              <tr key={ index }>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-item-number-${index}`
+                  }
+                >
+                  { index }
+                </td>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-name-${index}`
+                  }
+                >
+                  { order.name }
+                </td>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-quantity-${index}`
+                  }
+                >
+                  { order.quantity }
+                </td>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-unit-price-${index}`
+                  }
+                >
+                  { `R$ ${showedUnitValue}` }
+                </td>
+                <td
+                  data-testid={
+                    `customer_order_details__element-order-table-sub-total-${index}`
+                  }
+                >
+                  { `R$ ${showedSubTotal}` }
+                </td>
+              </tr>
+            );
+          }) }
         </tbody>
       </table>
       <div
-        data-testid="seller_order_details__element-order-total-price"
+        data-testid="customer_order_details__element-order-total-price"
       >
         { orders[0].totalPrice }
       </div>
