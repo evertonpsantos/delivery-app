@@ -42,7 +42,7 @@ body {
   padding: 15px;
 }
 
-.status-entregue {
+.status-Entregue {
   align-items: center;
   background-color: #00cc9b;
   border-radius: 8px;
@@ -58,7 +58,7 @@ body {
   text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
 }
 
-.status-pendente {
+.status-Pendente {
   align-items: center;
   background-color: #ccb800;
   border-radius: 8px;
@@ -73,7 +73,7 @@ body {
   text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
 }
 
-.status-preparando {
+.status-Preparando {
   align-items: center;
   background-color: #6c0;
   border-radius: 8px;
