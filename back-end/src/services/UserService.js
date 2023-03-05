@@ -20,4 +20,17 @@ const getAllSellers = async () => {
   return sellers;
 };
 
-module.exports = { loginService, getAllSellers };
+async function getSellerById(id) {
+  try {
+    const seller = await User.findOne({ where: { id } });
+    return seller;
+  } catch (error) {
+    return error.message;
+  }
+}
+
+module.exports = {
+  getSellerById,
+  loginService,
+  getAllSellers,
+};
