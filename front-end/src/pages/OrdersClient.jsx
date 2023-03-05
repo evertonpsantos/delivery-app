@@ -46,7 +46,7 @@ export default function OrdersClient() {
 
       <div
         data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-        className={ `status-${order.status}` }
+        className={ `status-${(order.status).toLowerCase()}` }
       >
         { order.status }
       </div>
@@ -62,7 +62,7 @@ export default function OrdersClient() {
         data-testid={ `customer_orders__element-card-price-${order.id}` }
         className="total-price-order"
       >
-        { `R$ ${order.totalPrice}` }
+        { (order.totalPrice.toString().replace('.', ',')) }
       </div>
     </section>
   ));
