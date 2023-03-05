@@ -27,45 +27,48 @@ export default function OrdersClient() {
 
   if (myOrders.length < 1) return <div>Loading...</div>;
 
-  const orders = myOrders.map((order) => (
-    <section
-      role="presentation"
-      onClick={ () => pushTo(order.id) }
-      className="order-content"
-      key={ order.id }
-    >
-      <div
-        data-testid={ `customer_orders__element-order-id-${order.id}` }
-        className="number-order"
+  const orders = myOrders.map((order) => {
+    const priceTotal = Number(order.totalPrice).toFixed(2).toString().replace('.', ',');
+    return (
+      <section
+        role="presentation"
+        onClick={ () => pushTo(order.id) }
+        className="order-content"
+        key={ order.id }
       >
-        <div>
-          <p className="pedido">Pedido</p>
-          { `000${order.id}` }
+        <div
+          data-testid={ `customer_orders__element-order-id-${order.id}` }
+          className="number-order"
+        >
+          <div>
+            <p className="pedido">Pedido</p>
+            { `000${order.id}` }
+          </div>
         </div>
-      </div>
 
-      <div
-        data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-        className={ `status-${(order.status).toLowerCase()}` }
-      >
-        { order.status }
-      </div>
+        <div
+          data-testid={ `customer_orders__element-delivery-status-${order.id}` }
+          className={ `status-${order.status}` }
+        >
+          { order.status }
+        </div>
 
-      <div
-        data-testid={ `customer_orders__element-order-date-${order.id}` }
-        className="date-order"
-      >
-        { order.saleDate }
-      </div>
+        <div
+          data-testid={ `customer_orders__element-order-date-${order.id}` }
+          className="date-order"
+        >
+          { order.saleDate }
+        </div>
 
-      <div
-        data-testid={ `customer_orders__element-card-price-${order.id}` }
-        className="total-price-order"
-      >
-        { (order.totalPrice.toString().replace('.', ',')) }
-      </div>
-    </section>
-  ));
+        <div
+          data-testid={ `customer_orders__element-card-price-${order.id}` }
+          className="total-price-order"
+        >
+          {priceTotal}
+        </div>
+      </section>
+    );
+  });
 
   return (
     <main className="container-myorders">
