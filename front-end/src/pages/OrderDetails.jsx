@@ -10,7 +10,7 @@ function OrderDetails() {
 
   const { id } = useParams();
 
-  const bug = 'Group customer_order_details__element-order-details-label-order-date';
+  const bug = 'customer_order_details__element-order-details-label-order-date';
 
   useEffect(() => {
     const getData = async () => {
@@ -31,7 +31,7 @@ function OrderDetails() {
       <h2>Detalhes do pedido</h2>
       <div>
         <div
-          data-testid="customer_order_details__element-order-details-label-order-date"
+          data-testid="customer_order_details__element-order-details-label-order-id"
         >
           { `Pedido 00${orders[0].id}` }
         </div>
@@ -52,11 +52,13 @@ function OrderDetails() {
         >
           { orders[0].status }
         </div>
-        <div
+        <button
+          type="button"
+          disabled
           data-testid="customer_order_details__button-delivery-check"
         >
           marcar como entregue
-        </div>
+        </button>
       </div>
       <table>
         <thead>
