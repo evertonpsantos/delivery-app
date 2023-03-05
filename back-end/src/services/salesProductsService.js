@@ -10,7 +10,7 @@ async function findSaleAndProduct(id) {
       });
 
       const dataSale = result.map(async ({ saleId, productId, quantity }) => {
-        const saleData = await saleService.findWithItemsSale(saleId);
+        const saleData = await saleService.findSale(saleId);
         const productData = await productsService.findProduct(productId);
 
         const obj = transformToObject(saleData, productData, quantity);
