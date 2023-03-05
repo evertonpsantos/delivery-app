@@ -9,10 +9,9 @@ async function findUserSales(id) {
   }
 }
 
-async function findWithItemsSale(id) {
+async function findSale(id) {
     try {
-      const result = await Sale.findOne({ where: { id },
-        attributes: ['id', 'totalPrice', 'saleDate', 'status'] });
+      const result = await Sale.findOne({ where: { id } });
       return result;
     } catch (error) {
       return error.message;
@@ -36,7 +35,7 @@ const getAllSales = async () => {
 
 module.exports = {
   findUserSales,
-  findWithItemsSale,
+  findSale,
   registerNewSale,
   getAllSales,
 };
