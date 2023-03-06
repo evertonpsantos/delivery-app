@@ -18,7 +18,7 @@ function Login() {
         history.push(CUSTOMER_ROUTE);
       }
       if (stor.role === 'seller') {
-        history.push('/seller');
+        history.push('/seller/orders');
       }
       if (stor.role === 'administrator') {
         history.push('/administrator');
@@ -48,7 +48,7 @@ function Login() {
       history.push('/administrator');
       break;
     case 'seller':
-      history.push('/seller');
+      history.push('/seller/orders');
       break;
     case 'customer':
       localStorage.setItem('user', JSON.stringify(user));
@@ -58,7 +58,6 @@ function Login() {
       break;
     }
     localStorage.setItem('user', JSON.stringify(jsonResult));
-    history.push(CUSTOMER_ROUTE);
   };
 
   function toRegister() {

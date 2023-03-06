@@ -21,4 +21,15 @@ async function findAll(req, res) {
   }
 }
 
-module.exports = { registerSale, getSales, findAll };
+async function findSaleBySeller(req, res) {
+  const { id } = req.params;
+  
+  try {
+    const result = await salesService.findSaleBySeller(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+}
+
+module.exports = { registerSale, getSales, findAll, findSaleBySeller };
