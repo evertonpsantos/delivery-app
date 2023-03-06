@@ -7,7 +7,6 @@ import NavbarSeller from '../components/NavbarSeller';
 
 function OrderDetailsSeller() {
   const [orders, setOrders] = useState([]);
-  const [orderInPrepare, setOrderInPrepare] = useState(false);
 
   const { id } = useParams();
 
@@ -15,19 +14,12 @@ function OrderDetailsSeller() {
     const getData = async () => {
       const myOrders = await fetchData(`http://localhost:3001/salesproducts/${id}`);
       const orderDetailed = translateDatetimeToDate(myOrders);
-      if (orderDetailed.status === 'entregue') { setOrderInPrepare(true); }
-      if (orderDetailed.status === 'preparando') { setOrderInPrepare(true); }
-      if (orderDetailed.status === 'pendente') { setOrderInPrepare(false); }
       setOrders(orderDetailed);
     };
 
     getData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  async function setOrderStatus() {
-
-  }
 
   if (orders.length < 1) return <div>Loading...</div>;
 
@@ -53,9 +45,8 @@ function OrderDetailsSeller() {
         </div>
         <button
           type="button"
-          disabled={ orderInPrepare }
+          disabled={ false }
           data-testid="seller_order_details__button-preparing-check"
-          onClick={ setOrderStatus }
         >
           preparar pedido
         </button>
