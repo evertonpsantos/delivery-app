@@ -41,7 +41,7 @@ function OrderDetailsSeller() {
         <div
           data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
-          { orders.status }
+          { orders[0].status }
         </div>
         <button
           type="button"
