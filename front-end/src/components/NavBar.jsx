@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import LoginContext from '../context/LoginContext';
 import '../styles/navBarCustomer.css';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
   // const { user } = useContext(LoginContext);
+  const [userName, setUserName] = useState('');
 
   const logout = () => {
     localStorage.removeItem('user');
   };
 
-  const getUserName = () => {
-    const userName = JSON.parse(localStorage.getItem('user')) || '';
-    if (userName) {
-      return userName.name;
-    }
-  };
+  useEffect(() => {
+    const getUserName = () => {
+      const user = JSON.parse(localStorage.getItem('user')) || '';
+      if (user) {
+        setUserName(user.name);
+      }
+    };
+
+    getUserName();
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="left_side">
@@ -47,7 +53,7 @@ function NavBar() {
           className="navbar_nome"
           data-testid="customer_products__element-navbar-user-full-name"
         >
-          { getUserName() }
+          { userName }
         </div>
 
         <div className="navbar_sair">
