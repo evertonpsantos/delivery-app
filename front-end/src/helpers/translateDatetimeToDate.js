@@ -17,4 +17,6 @@ function translateDatetimeToDate(arr) {
   return mappedArray;
 }
 
+// coment
+
 export default translateDatetimeToDate;
