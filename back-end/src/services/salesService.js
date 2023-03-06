@@ -33,7 +33,17 @@ const getAllSales = async () => {
   return allSales;
 };
 
+async function findSaleBySeller(id) {
+  try {
+    const result = await Sale.findAll({ where: { sellerId: id } });
+    return result;
+  } catch (error) {
+    return error.message;
+  }
+}
+
 module.exports = {
+  findSaleBySeller,
   findUserSales,
   findSale,
   registerNewSale,
