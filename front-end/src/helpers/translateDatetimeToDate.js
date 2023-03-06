@@ -10,7 +10,7 @@ function translateDatetimeToDate(arr) {
     if (month.length < 2) {
       month = `0${month}`;
     }
-    const dateString = `${day}/${month}/${year}`;
+    const dateString = `${month}/${day}/${year}`;
     const newDate = { ...e, saleDate: dateString };
     return newDate;
   });
