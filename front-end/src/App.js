@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Register from './pages/Register';
-// import Customer from './pages/Customer';
+import OrdersClient from './pages/OrdersClient';
+import OrderDetails from './pages/OrderDetails';
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import ProviderProduct from './context/ProductProvider';
@@ -16,6 +17,8 @@ function App() {
           <Route path="/register" component={ Register } />
           <Route exact path="/customer/checkout" component={ Checkout } />
           <Route path="/customer/products" component={ Products } />
+          <Route exact path="/customer/orders" component={ OrdersClient } />
+          <Route exact path="/customer/orders/:id" component={ OrderDetails } />
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>

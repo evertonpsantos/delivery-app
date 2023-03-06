@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
@@ -6,9 +6,26 @@ import verifyLoginInfo from '../helpers/verifyLoginInfo';
 function Login() {
   const { email, setEmail, password, setPassword,
     setUser, user } = useContext(LoginContext);
-
   const [invalidUser, setInvalidUser] = useState(false);
   const history = useHistory();
+
+  const CUSTOMER_ROUTE = '/customer/products';
+
+  useEffect(() => {
+    const stor = JSON.parse(localStorage.getItem('user'));
+    if (stor) {
+      if (stor.role === 'customer') {
+        history.push(CUSTOMER_ROUTE);
+      }
+      if (stor.role === 'seller') {
+        history.push('/seller');
+      }
+      if (stor.role === 'administrator') {
+        history.push('/administrator');
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSubmitButton = async () => {
     const loginData = { email, password };
@@ -35,13 +52,13 @@ function Login() {
       break;
     case 'customer':
       localStorage.setItem('user', JSON.stringify(user));
-      history.push('/customer/products');
+      history.push(CUSTOMER_ROUTE);
       break;
     default:
       break;
     }
     localStorage.setItem('user', JSON.stringify(jsonResult));
-    history.push('/customer/products');
+    history.push(CUSTOMER_ROUTE);
   };
 
   function toRegister() {

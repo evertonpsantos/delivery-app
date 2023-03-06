@@ -8,15 +8,19 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.STRING,
-    price: DataTypes.DECIMAL(3, 2),
-    urlImage: DataTypes.STRING
+    name: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.DECIMAL(3, 2), allowNull: false },
+    urlImage: { type: DataTypes.STRING, allowNull: false, field: 'url_image' },
     }, {
     modelName: 'Product',
-    underscored: true,
     timestamps: false,
+    underscored: true,
     tableName: 'products',
   });
+
+  product.associate = (models) => {
+    product.belongsTo(models.SalesProducts, { foreignKey: 'id', as: 'product' });
+  }
 
   return product;
 };
