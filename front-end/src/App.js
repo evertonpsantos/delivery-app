@@ -10,6 +10,7 @@ import Products from './pages/Products';
 import LoginProvider from './context/LoginContextProvider';
 import OrdersSellers from './pages/OrdersSellers';
 import OrderDetailsSeller from './pages/OrderDetailsSeller';
+import AdminManage from './pages/AdminManage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/customer/products" component={ Products } />
           <Route exact path="/customer/orders" component={ OrdersClient } />
           <Route exact path="/seller/orders" component={ OrdersSellers } />
+          <Route exact path="/admin/manage" component={ AdminManage } />
           <Route exact path="/customer/orders/:id" component={ OrderDetails } />
           <Route exact path="/seller/orders/:id" component={ OrderDetailsSeller } />
           <Route exact path="/">

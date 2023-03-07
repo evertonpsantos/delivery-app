@@ -21,7 +21,7 @@ function Login() {
         history.push('/seller/orders');
       }
       if (stor.role === 'administrator') {
-        history.push('/administrator');
+        history.push('/admin/manage');
       }
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -45,7 +45,7 @@ function Login() {
     setUser(jsonResult);
     switch (jsonResult.role) {
     case 'administrator':
-      history.push('/administrator');
+      history.push('/admin/manage');
       break;
     case 'seller':
       history.push('/seller/orders');
