@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
-import '../styles/orderDetails.css';
+import '../styles/clientOrderDetails.css';
 import NavbarSeller from '../components/NavbarSeller';
 
 function OrderDetailsSeller() {
