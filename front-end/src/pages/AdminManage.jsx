@@ -8,6 +8,23 @@ function AdminManage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('customer');
 
+  const registerUser = async () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    await fetch('http://localhost:3001/register/admin', {
+      method: 'POST',
+      body: JSON.stringify({ name, email, password, role }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: user.token,
+      },
+      'Access-Control-Allow-Origin': '*',
+    });
+
+    // const jsonRes = await response.json();
+  };
+
   return (
     <>
       <NavBarManager />
@@ -48,7 +65,7 @@ function AdminManage() {
           type="button"
           data-testid="admin_manage__button-register"
           disabled={ verifyAdminForm(email, name, password) }
-          // onClick={ register }
+          onClick={ registerUser }
         >
           CADASTRAR
         </button>
