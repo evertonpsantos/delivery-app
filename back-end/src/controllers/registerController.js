@@ -25,5 +25,5 @@ async function registerNewUserAdmin(req, res) {
 
 module.exports = {
   registerUser,
-  registerNewUserAdmin
+  registerNewUserAdmin,
 };

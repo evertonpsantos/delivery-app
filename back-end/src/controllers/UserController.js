@@ -20,6 +20,6 @@ const getSellers = async (_req, res) => {
 const getUsers = async (_req, res) => {
   const result = await getAllUsers();
   return res.status(200).json(result);
-}
+};
 
 module.exports = { login, getSellers, getUsers };

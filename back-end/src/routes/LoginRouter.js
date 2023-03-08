@@ -5,6 +5,6 @@ const loginRouter = express.Router();
 
 loginRouter.post('/', login);
 loginRouter.get('/sellers', getSellers);
-loginRouter.get('/users', getUsers)
+loginRouter.get('/users', getUsers);
 
 module.exports = loginRouter;
