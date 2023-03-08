@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
-import '../styles/clientOrderDetails.css';
+import '../styles/sellerOrderDetails.css';
 import NavbarSeller from '../components/NavbarSeller';
 
 function OrderDetailsSeller() {
@@ -24,26 +24,30 @@ function OrderDetailsSeller() {
   if (orders.length < 1) return <div>Loading...</div>;
 
   return (
-    <main className="main-order-details">
+    <main className="seller-details-order-page-main-order-details">
       <NavbarSeller />
       <h2>Detalhes do pedido</h2>
-      <div>
+      <div className="seller-details-order-page-header-infos">
         <div
+          className="seller-details-order-page-order-number"
           data-testid="seller_order_details__element-order-details-label-order-id"
         >
           { `Pedido 00${orders[0].id}` }
         </div>
         <div
+          className="seller-details-order-page-order-number"
           data-testid="seller_order_details__element-order-details-label-order-date"
         >
           { orders[0].saleDate }
         </div>
         <div
+          className={ `seller-details-order-page-order-status-${orders[0].status}` }
           data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
           { orders[0].status }
         </div>
         <button
+          className="seller-details-order-page-mark-as-delivered"
           type="button"
           disabled={ false }
           data-testid="seller_order_details__button-preparing-check"
@@ -51,6 +55,7 @@ function OrderDetailsSeller() {
           preparar pedido
         </button>
         <button
+          className="seller-details-order-page-mark-as-in-delivery"
           type="button"
           disabled
           data-testid="seller_order_details__button-dispatch-check"
@@ -58,17 +63,15 @@ function OrderDetailsSeller() {
           saiu para entrega
         </button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Descrição</th>
-            <th>Quantidade</th>
-            <th>Valor Unitário</th>
-            <th>Sub-total</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div>
+        <div className="seller-details-order-page-table-head">
+          <div>Item</div>
+          <div>Descrição</div>
+          <div>Quantidade</div>
+          <div>Valor Unitário</div>
+          <div>Sub-total</div>
+        </div>
+        <div className="seller-details-order-page-table-att">
           { orders.map((order, index) => {
             const productPrice = Number(order.price).toFixed(2);
             const productQuantity = Number(order.quantity);
@@ -77,48 +80,54 @@ function OrderDetailsSeller() {
             const showedUnitValue = productPrice.toString().replace('.', ',');
             const showedSubTotal = subTotal.toString().replace('.', ',');
             return (
-              <tr key={ index }>
-                <td
+              <div key={ index } className="seller-details-order-page-table-body">
+                <div
+                  className="seller-details-order-page-number-product"
                   data-testid={
                     `seller_order_details__element-order-table-item-number-${index}`
                   }
                 >
                   { index }
-                </td>
-                <td
+                </div>
+                <div
+                  className="seller-details-order-page-description-product"
                   data-testid={
                     `seller_order_details__element-order-table-name-${index}`
                   }
                 >
                   { order.name }
-                </td>
-                <td
+                </div>
+                <div
+                  className="seller-details-order-page-quantity-product"
                   data-testid={
                     `seller_order_details__element-order-table-quantity-${index}`
                   }
                 >
                   { order.quantity }
-                </td>
-                <td
+                </div>
+                <div
+                  className="seller-details-order-page-unit-value-product"
                   data-testid={
                     `seller_order_details__element-order-table-unit-price-${index}`
                   }
                 >
                   { `R$ ${showedUnitValue}` }
-                </td>
-                <td
+                </div>
+                <div
+                  className="seller-details-order-page-sub-total-product"
                   data-testid={
                     `seller_order_details__element-order-table-sub-total-${index}`
                   }
                 >
                   { `R$ ${showedSubTotal}` }
-                </td>
-              </tr>
+                </div>
+              </div>
             );
           }) }
-        </tbody>
-      </table>
+        </div>
+      </div>
       <div
+        className="client-details-order-page-total-price-product"
         data-testid="seller_order_details__element-order-total-price"
       >
         { orders[0].totalPrice }

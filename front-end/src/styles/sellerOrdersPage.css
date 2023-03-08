@@ -1,0 +1,126 @@
+.seller-order-page-container-myorders {
+  display: grid;
+  gap: 35px;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: fit-content;
+}
+
+.seller-order-page-order-content {
+  background-color: #eaf1ef;
+  border: 1px solid #b1c2be;
+  border-radius: 1px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: grid;
+  gap: 7px;
+  grid-template-columns: 13vh 20vh 20vh;
+  grid-template-rows: auto auto;
+}
+
+.seller-order-page-number-order {
+  align-items: center;
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+  font-weight: 400;
+  grid-row: 1 / -1;
+  justify-content: center;
+  opacity: 0.7;
+  padding: 15px;
+}
+
+.seller-order-page-status-Entregue {
+  align-items: center;
+  background-color: #00cc9b;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 20px;
+  font-weight: 900;
+  grid-row: 1 / -1;
+  justify-content: center;
+  margin: 10px 0;
+  opacity: 0.75;
+  text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
+}
+
+.seller-order-page-status-Pendente {
+  align-items: center;
+  background-color: #ccb800;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 20px;
+  font-weight: 900;
+  grid-row: 1 / -1;
+  justify-content: center;
+  margin: 10px 0;
+  opacity: 0.75;
+  text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
+}
+
+.seller-order-page-status-Preparando {
+  align-items: center;
+  background-color: #6c0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 20px;
+  font-weight: 900;
+  grid-row: 1 / -1;
+  justify-content: center;
+  margin: 10px 0;
+  opacity: 0.75;
+  text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
+}
+
+.seller-order-page-date-order {
+  align-items: center;
+  background-color: #f2fffc;
+  border-radius: 4px;
+  display: flex;
+  font-size: 21px;
+  font-weight: 900;
+  grid-column: 3;
+  grid-row: 1;
+  justify-content: center;
+  margin-right: 10px;
+  margin-top: 10px;
+  opacity: 0.75;
+  padding: 5px;
+}
+
+.seller-order-page-total-price-order {
+  align-items: center;
+  background-color: #f2fffc;
+  border-radius: 4px;
+  display: flex;
+  font-size: 21px;
+  font-weight: 900;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  opacity: 0.75;
+  padding: 5px;
+}
+
+.seller-order-page-pedido {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.seller-order-page-address-order {
+  font-size: 15px;
+  grid-column: 3;
+  padding: 0 0 5px;
+  width: 100%;
+}
