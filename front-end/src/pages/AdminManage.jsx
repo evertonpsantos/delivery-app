@@ -10,14 +10,14 @@ function AdminManage() {
   const [error, setError] = useState(false);
   const [users, setUsers] = useState([]);
 
+  const fetchUsers = async () => {
+    const usersFound = await fetch('http://localhost:3001/login/users');
+    const resJson = await usersFound.json();
+
+    setUsers(resJson);
+  };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      const usersFound = await fetch('http://localhost:3001/login/users');
-      const resJson = await usersFound.json();
-
-      setUsers(resJson);
-    };
-
     fetchUsers();
   }, []);
 
@@ -37,6 +37,8 @@ function AdminManage() {
     });
 
     if (result.status === errorStatus) return setError(true);
+
+    await fetchUsers();
   };
 
   const removeItem = (id) => {
