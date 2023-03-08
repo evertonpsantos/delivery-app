@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NavBarManager from '../components/NavBarManager';
 import verifyAdminForm from '../helpers/verifyAdminForm';
 
@@ -8,6 +8,18 @@ function AdminManage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('customer');
   const [error, setError] = useState(false);
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const usersFound = await fetch('http://localhost:3001/login/users');
+      const resJson = await usersFound.json();
+
+      setUsers(resJson);
+    };
+
+    fetchUsers();
+  }, []);
 
   const registerUser = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -25,15 +37,17 @@ function AdminManage() {
     });
 
     if (result.status === errorStatus) return setError(true);
+  };
 
-    // const jsonRes = await response.json();
+  const removeItem = (id) => {
+    const filtereredList = users.filter((user) => user.id !== id);
+    setUsers(filtereredList);
   };
 
   return (
     <>
       <NavBarManager />
-      <div>AdminManage</div>
-      <form className="form">
+      <form className="form" style={ { marginTop: '40px' } }>
         <p>Nome</p>
         <input
           data-testid="admin_manage__input-name"
@@ -82,6 +96,61 @@ function AdminManage() {
           </p>
         )}
       </form>
+
+      <p style={ { marginTop: '10px' } }>Lista de Usuários</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Tipo</th>
+            <th>Excluir</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          { users.map((user, index) => (
+            <tr key={ index }>
+              <td
+                data-testid={ `admin_manage__element-user-table-item-number-${index}` }
+              >
+                { index + 1}
+              </td>
+
+              <td
+                data-testid={ `admin_manage__element-user-table-name-${index}` }
+              >
+                { user.name }
+              </td>
+
+              <td
+                data-testid={ `admin_manage__element-user-table-email-${index}` }
+              >
+                { user.email }
+              </td>
+
+              <td
+                data-testid={ `admin_manage__element-user-table-role-${index}` }
+              >
+                { user.role }
+              </td>
+
+              <td
+                data-testid={ `admin_manage__element-user-table-remove-${index}` }
+              >
+                <button
+                  type="button"
+                  onClick={ () => removeItem(user.id) }
+                >
+                  Remover
+                </button>
+              </td>
+
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 }
