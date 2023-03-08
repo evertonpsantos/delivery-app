@@ -27,6 +27,18 @@ async function registerUser(dataNewUser) {
     }
 }
 
+async function registerUserAdmin({ name, email, password, role}) {
+  const mdPassword = md5(password, 10);
+
+  try {
+    const newUser = await User.create({ name, email, password: mdPassword, role});
+    return newUser;
+  } catch (error) {
+    return { message: error.message };
+  }
+}
+
 module.exports = {
   registerUser,
+  registerUserAdmin
 };
