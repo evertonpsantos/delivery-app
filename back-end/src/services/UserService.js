@@ -29,8 +29,14 @@ async function getSellerById(id) {
   }
 }
 
+const getAllUsers = async () => {
+  const allUsers = await User.findAll();
+  return allUsers;
+};
+
 module.exports = {
   getSellerById,
   loginService,
   getAllSellers,
+  getAllUsers,
 };

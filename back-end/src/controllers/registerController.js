@@ -14,6 +14,16 @@ async function registerUser(req, res) {
   }
 }
 
+async function registerNewUserAdmin(req, res) {
+  try {
+    const result = await registerService.registerUserAdmin(req.body);
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.status(409).json({ message: error.message });
+  }
+}
+
 module.exports = {
   registerUser,
+  registerNewUserAdmin,
 };
