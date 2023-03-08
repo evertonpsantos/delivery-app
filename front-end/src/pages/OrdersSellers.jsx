@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import NavbarSeller from '../components/NavbarSeller';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
+import '../styles/sellerOrdersPage.css';
 
 function OrdersSellers() {
   const [orders, setOrders] = useState([]);
@@ -32,12 +33,12 @@ function OrdersSellers() {
       <section
         role="presentation"
         onClick={ () => pushTo(order.id) }
-        className="order-content"
+        className="seller-order-page-order-content"
         key={ order.id }
       >
         <div
           data-testid={ `seller_orders__element-order-id-${order.id}` }
-          className="number-order"
+          className="seller-order-page-number-order"
         >
           <div>
             <p className="pedido">Pedido</p>
@@ -47,27 +48,27 @@ function OrdersSellers() {
 
         <div
           data-testid={ `seller_orders__element-delivery-status--${order.id}` }
-          className={ `status-${order.status}` }
+          className={ `seller-order-page-status-${order.status}` }
         >
           { order.status }
         </div>
 
         <div
           data-testid={ `seller_orders__element-order-date-${order.id}` }
-          className="date-order"
+          className="seller-order-page-date-order"
         >
           { order.saleDate }
         </div>
 
         <div
           data-testid={ `seller_orders__element-card-price-${order.id}` }
-          className="total-price-order"
+          className="seller-order-page-total-price-order"
         >
           {priceTotal}
         </div>
         <div
           data-testid={ `seller_orders__element-card-address-${order.id}` }
-          className="total-price-order"
+          className="seller-order-page-address-order"
         >
           { `${order.deliveryAddress}, ${order.deliveryNumber} ` }
         </div>
@@ -76,7 +77,7 @@ function OrdersSellers() {
   });
 
   return (
-    <main className="container-myorders">
+    <main className="seller-order-page-container-myorders">
       <NavbarSeller />
       { myOrders }
     </main>
