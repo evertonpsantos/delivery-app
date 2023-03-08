@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
-import '../styles/myOrdersPage.css';
+import '../styles/clientOrdersPage.css';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
 import NavBar from '../components/NavBar';
 
@@ -33,36 +33,36 @@ export default function OrdersClient() {
       <section
         role="presentation"
         onClick={ () => pushTo(order.id) }
-        className="order-content"
+        className="client-order-page-order-content"
         key={ order.id }
       >
         <div
           data-testid={ `customer_orders__element-order-id-${order.id}` }
-          className="number-order"
+          className="client-order-page-number-order"
         >
           <div>
-            <p className="pedido">Pedido</p>
+            <p className="client-order-page-pedido">Pedido</p>
             { `000${order.id}` }
           </div>
         </div>
 
         <div
           data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-          className={ `status-${order.status}` }
+          className={ `client-order-page-status-${order.status}` }
         >
           { order.status }
         </div>
 
         <div
           data-testid={ `customer_orders__element-order-date-${order.id}` }
-          className="date-order"
+          className="client-order-page-date-order"
         >
           { order.saleDate }
         </div>
 
         <div
           data-testid={ `customer_orders__element-card-price-${order.id}` }
-          className="total-price-order"
+          className="client-order-page-total-price-order"
         >
           {priceTotal}
         </div>
@@ -71,7 +71,7 @@ export default function OrdersClient() {
   });
 
   return (
-    <main className="container-myorders">
+    <main className="client-order-page-container-myorders">
       <NavBar />
       { orders }
     </main>

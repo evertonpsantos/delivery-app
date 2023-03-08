@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-// import LoginContext from '../context/LoginContext';
 import '../styles/navBarCustomer.css';
 import { Link } from 'react-router-dom';
 
 function NavBar() {
-  // const { user } = useContext(LoginContext);
   const [userName, setUserName] = useState('');
 
   const logout = () => {
