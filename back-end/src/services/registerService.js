@@ -30,12 +30,11 @@ async function registerUser(dataNewUser) {
 async function registerUserAdmin({ name, email, password, role}) {
   const mdPassword = md5(password, 10);
 
-  try {
-    const newUser = await User.create({ name, email, password: mdPassword, role});
-    return newUser;
-  } catch (error) {
-    return { message: error.message };
-  }
+  const userExists = await User.findOne({ where: { name, email }});
+  if(userExists) throw new Error('Email or name already exists');
+
+  const newUser = await User.create({ name, email, password: mdPassword, role});
+  return newUser;
 }
 
 module.exports = {

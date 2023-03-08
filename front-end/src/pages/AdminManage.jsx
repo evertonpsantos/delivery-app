@@ -7,11 +7,13 @@ function AdminManage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('customer');
+  const [error, setError] = useState(false);
 
   const registerUser = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    const errorStatus = 409;
 
-    await fetch('http://localhost:3001/register/admin', {
+    const result = await fetch('http://localhost:3001/register/admin', {
       method: 'POST',
       body: JSON.stringify({ name, email, password, role }),
       headers: {
@@ -21,6 +23,8 @@ function AdminManage() {
       },
       'Access-Control-Allow-Origin': '*',
     });
+
+    if (result.status === errorStatus) return setError(true);
 
     // const jsonRes = await response.json();
   };
@@ -69,6 +73,14 @@ function AdminManage() {
         >
           CADASTRAR
         </button>
+
+        { error && (
+          <p
+            data-testid="admin_manage__element-invalid-register"
+          >
+            E-mail ou Nome Já Existentes
+          </p>
+        )}
       </form>
     </>
   );
