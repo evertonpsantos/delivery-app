@@ -41,8 +41,16 @@ function AdminManage() {
     await fetchUsers();
   };
 
-  const removeItem = (id) => {
+  const removeItem = async (id) => {
     const filtereredList = users.filter((user) => user.id !== id);
+    await fetch(`http://localhost:3001/login/remove/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      'Access-Control-Allow-Origin': '*',
+    });
     setUsers(filtereredList);
   };
 
