@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import NavbarSeller from '../components/NavbarSeller';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
-import '../styles/sellerOrdersPage.css';
+// import '../styles/sellerOrdersPage.css';
 
 function OrdersSellers() {
   const [orders, setOrders] = useState([]);
@@ -13,6 +13,7 @@ function OrdersSellers() {
   useEffect(() => {
     const getData = async () => {
       const user = JSON.parse(localStorage.getItem('user'));
+      // const user = JSON.parse(localStorage.getItem('seller'));
       const result = await fetchData(`http://localhost:3001/sales/seller/${user.id}`);
       setOrders(translateDatetimeToDate(result));
     };
@@ -47,7 +48,7 @@ function OrdersSellers() {
         </div>
 
         <div
-          data-testid={ `seller_orders__element-delivery-status--${order.id}` }
+          data-testid={ `seller_orders__element-delivery-status-${order.id}` }
           className={ `seller-order-page-status-${order.status}` }
         >
           { order.status }

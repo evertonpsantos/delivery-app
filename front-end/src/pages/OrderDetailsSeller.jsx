@@ -105,7 +105,7 @@ function OrderDetailsSeller() {
                     `seller_order_details__element-order-table-item-number-${index}`
                   }
                 >
-                  { index }
+                  { index + 1 }
                 </div>
                 <div
                   className="seller-details-order-page-description-product"
