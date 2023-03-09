@@ -42,10 +42,15 @@ async function findSaleBySeller(id) {
   }
 }
 
+async function updateSaleStatus (id, status) {
+  await Sale.update({ status }, { where: { id } });
+}
+
 module.exports = {
   findSaleBySeller,
   findUserSales,
   findSale,
   registerNewSale,
   getAllSales,
+  updateSaleStatus,
 };
