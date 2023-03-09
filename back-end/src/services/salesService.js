@@ -42,7 +42,7 @@ async function findSaleBySeller(id) {
   }
 }
 
-async function updateSaleStatus (id, status) {
+async function updateSaleStatus(id, status) {
   await Sale.update({ status }, { where: { id } });
 }
 

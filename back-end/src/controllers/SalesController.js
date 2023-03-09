@@ -37,7 +37,7 @@ async function updateSaleStatus(req, res) {
   const { status } = req.body;
 
   await salesService.updateSaleStatus(id, status);
-  return res.status(200).json({ message: 'Updated successfully'});
+  return res.status(200).json({ message: 'Updated successfully' });
 }
 
 module.exports = { registerSale, getSales, findAll, findSaleBySeller, updateSaleStatus };
