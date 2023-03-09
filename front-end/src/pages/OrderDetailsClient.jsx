@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import fetchData from '../helpers/fetchData';
 import translateDatetimeToDate from '../helpers/translateDatetimeToDate';
-// import '../styles/clientOrderDetails.css';
+import '../styles/clientOrderDetails.css';
 import NavBar from '../components/NavBar';
 
 function OrderDetails() {
@@ -64,7 +64,10 @@ function OrderDetails() {
           { orders[0].saleDate }
         </div>
         <div
-          className={ `client-details-order-page-order-status-${orders[0].status}` }
+          className={
+            `client-details-order-page-order-status-${orders[0].status.replace('â', 'a')
+              .replace('Em T', 'em-t')}`
+          }
           data-testid={
             `customer_order_details__element-order-details-label-delivery-status-${id}`
           }

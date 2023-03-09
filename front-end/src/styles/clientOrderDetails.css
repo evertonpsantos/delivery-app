@@ -52,6 +52,13 @@
   padding: 5px 25px;
 }
 
+.client-details-order-page-order-status-em-transito {
+  background-color: rgba(41, 175, 52);
+  border-radius: 9px;
+  font-weight: 800;
+  padding: 5px 25px;
+}
+
 .client-details-order-page-order-status-Entregue {
   background-color: #00cc9b;
   border-radius: 9px;

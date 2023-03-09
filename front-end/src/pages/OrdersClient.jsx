@@ -48,7 +48,8 @@ export default function OrdersClient() {
 
         <div
           data-testid={ `customer_orders__element-delivery-status-${order.id}` }
-          className={ `client-order-page-status-${order.status}` }
+          className={ `client-order-page-status-${order.status.replace('â', 'a')
+            .replace('Em T', 'em-t')}` }
         >
           { order.status }
         </div>

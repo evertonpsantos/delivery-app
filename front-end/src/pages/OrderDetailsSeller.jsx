@@ -57,7 +57,10 @@ function OrderDetailsSeller() {
           { orders[0].saleDate }
         </div>
         <div
-          className={ `seller-details-order-page-order-status-${orders[0].status}` }
+          className={
+            `seller-details-order-page-order-status-${orders[0].status.replace('â', 'a')
+              .replace('Em T', 'em-t')}`
+          }
           data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
           { orders[0].status }
