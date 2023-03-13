@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginContext from '../context/LoginContext';
 import verifyLoginInfo from '../helpers/verifyLoginInfo';
+import '../styles/login.css';
 
 function Login() {
   const { email, setEmail, password, setPassword,
@@ -65,37 +66,37 @@ function Login() {
   }
 
   return (
-    <div>
-      <form>
-        <label htmlFor="login-email">
-          Login
-          <input
-            name="login-email"
-            data-testid="common_login__input-email"
-            placeholder="E-mail"
-            type="email"
-            onChange={ ({ target: { value } }) => setEmail(value) }
-            value={ email }
-          />
-        </label>
+    <div className="container">
+      <h1>Login</h1>
+      <form className="form">
+        <p className="bg-form">E-mail</p>
+        <input
+          name="login-email"
+          data-testid="common_login__input-email"
+          placeholder="E-mail"
+          type="email"
+          onChange={ ({ target: { value } }) => setEmail(value) }
+          value={ email }
+          className="login-input"
+        />
 
-        <label htmlFor="login-senha">
-          Senha
-          <input
-            name="login-senha"
-            data-testid="common_login__input-password"
-            placeholder="Senha"
-            type="password"
-            onChange={ ({ target: { value } }) => setPassword(value) }
-            value={ password }
-          />
-        </label>
+        <p className="bg-form">Senha</p>
+        <input
+          name="login-senha"
+          data-testid="common_login__input-password"
+          placeholder="Senha"
+          type="password"
+          onChange={ ({ target: { value } }) => setPassword(value) }
+          value={ password }
+          className="login-input"
+        />
 
         <button
           type="button"
           data-testid="common_login__button-login"
           disabled={ verifyLoginInfo(email, password) }
           onClick={ handleSubmitButton }
+          className={ verifyLoginInfo(email, password) ? 'button-disabled' : 'button' }
         >
           Login
         </button>
@@ -104,12 +105,18 @@ function Login() {
           onClick={ toRegister }
           type="button"
           data-testid="common_login__button-register"
+          className="register"
         >
           Ainda não tenho conta
         </button>
 
         { invalidUser && (
-          <p data-testid="common_login__element-invalid-email">E-mail Inválido</p>
+          <p
+            data-testid="common_login__element-invalid-email"
+            className="erro"
+          >
+            E-mail ou Senha Inválidos
+          </p>
         )}
 
       </form>
