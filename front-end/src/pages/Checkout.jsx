@@ -59,6 +59,8 @@ export default function Checkout() {
     const resultToJson = await result.json();
 
     history.push(`/customer/orders/${resultToJson.id}`);
+    localStorage.removeItem('carrinho');
+    setCart([]);
   };
 
   return (

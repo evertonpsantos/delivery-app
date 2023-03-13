@@ -24,13 +24,14 @@ function AdminManage() {
   const registerUser = async () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const errorStatus = 409;
+    const applicationJson = 'application/json';
 
     const result = await fetch('http://localhost:3001/register/admin', {
       method: 'POST',
       body: JSON.stringify({ name, email, password, role }),
       headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Content-Type': applicationJson,
+        Accept: applicationJson,
         Authorization: user.token,
       },
       'Access-Control-Allow-Origin': '*',
@@ -41,8 +42,16 @@ function AdminManage() {
     await fetchUsers();
   };
 
-  const removeItem = (id) => {
+  const removeItem = async (id) => {
     const filtereredList = users.filter((user) => user.id !== id);
+    await fetch(`http://localhost:3001/login/remove/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': applicationJson,
+        Accept: applicationJson,
+      },
+      'Access-Control-Allow-Origin': '*',
+    });
     setUsers(filtereredList);
   };
 

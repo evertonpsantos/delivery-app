@@ -25,6 +25,22 @@ function OrderDetails() {
 
   if (orders.length < 1) return <div>Loading...</div>;
 
+  const updateSaleStatus = async (saleId, status) => {
+    await fetch(`http://localhost:3001/sales/${saleId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      'Access-Control-Allow-Origin': '*',
+    });
+
+    const myOrders = await fetchData(`http://localhost:3001/salesproducts/${id}`);
+    const orderDetailed = translateDatetimeToDate(myOrders);
+    setOrders(orderDetailed);
+  };
+
   return (
     <main className="client-details-order-page-main-order-details">
       <NavBar />
@@ -48,9 +64,12 @@ function OrderDetails() {
           { orders[0].saleDate }
         </div>
         <div
-          className={ `client-details-order-page-order-status-${orders[0].status}` }
+          className={
+            `client-details-order-page-order-status-${orders[0].status.replace('â', 'a')
+              .replace('Em T', 'em-t')}`
+          }
           data-testid={
-            `customer_order_details__element-order-details-label-delivery-status=${id}`
+            `customer_order_details__element-order-details-label-delivery-status-${id}`
           }
         >
           { orders[0].status }
@@ -58,7 +77,8 @@ function OrderDetails() {
         <button
           className="client-details-order-page-mark-as-delivered"
           type="button"
-          disabled
+          disabled={ orders[0].status !== 'Em Trânsito' }
+          onClick={ () => updateSaleStatus(orders[0].id, 'Entregue') }
           data-testid="customer_order_details__button-delivery-check"
         >
           marcar como entregue
@@ -91,7 +111,7 @@ function OrderDetails() {
                     `customer_order_details__element-order-table-item-number-${index}`
                   }
                 >
-                  { index }
+                  { index + 1 }
                 </div>
                 <div
                   className="client-details-order-page-description-product"

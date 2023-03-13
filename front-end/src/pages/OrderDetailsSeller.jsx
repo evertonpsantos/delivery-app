@@ -23,6 +23,22 @@ function OrderDetailsSeller() {
 
   if (orders.length < 1) return <div>Loading...</div>;
 
+  const updateSaleStatus = async (saleId, status) => {
+    await fetch(`http://localhost:3001/sales/${saleId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ status }),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      'Access-Control-Allow-Origin': '*',
+    });
+
+    const myOrders = await fetchData(`http://localhost:3001/salesproducts/${id}`);
+    const orderDetailed = translateDatetimeToDate(myOrders);
+    setOrders(orderDetailed);
+  };
+
   return (
     <main className="seller-details-order-page-main-order-details">
       <NavbarSeller />
@@ -41,7 +57,10 @@ function OrderDetailsSeller() {
           { orders[0].saleDate }
         </div>
         <div
-          className={ `seller-details-order-page-order-status-${orders[0].status}` }
+          className={
+            `seller-details-order-page-order-status-${orders[0].status.replace('â', 'a')
+              .replace('Em T', 'em-t')}`
+          }
           data-testid="seller_order_details__element-order-details-label-delivery-status"
         >
           { orders[0].status }
@@ -49,15 +68,17 @@ function OrderDetailsSeller() {
         <button
           className="seller-details-order-page-mark-as-delivered"
           type="button"
-          disabled={ false }
+          disabled={ orders[0].status !== 'Pendente' }
           data-testid="seller_order_details__button-preparing-check"
+          onClick={ () => updateSaleStatus(orders[0].id, 'Preparando') }
         >
           preparar pedido
         </button>
         <button
           className="seller-details-order-page-mark-as-in-delivery"
           type="button"
-          disabled
+          disabled={ orders[0].status !== 'Preparando' }
+          onClick={ () => updateSaleStatus(orders[0].id, 'Em Trânsito') }
           data-testid="seller_order_details__button-dispatch-check"
         >
           saiu para entrega
@@ -87,7 +108,7 @@ function OrderDetailsSeller() {
                     `seller_order_details__element-order-table-item-number-${index}`
                   }
                 >
-                  { index }
+                  { index + 1 }
                 </div>
                 <div
                   className="seller-details-order-page-description-product"

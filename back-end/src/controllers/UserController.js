@@ -1,4 +1,5 @@
-const { loginService, getAllSellers, getAllUsers } = require('../services/UserService');
+const { loginService, getAllSellers, 
+  getAllUsers, deleteUser } = require('../services/UserService');
 const { newToken } = require('../utils/jwtFunction');
 
 const login = async (req, res) => {
@@ -22,4 +23,9 @@ const getUsers = async (_req, res) => {
   return res.status(200).json(result);
 };
 
-module.exports = { login, getSellers, getUsers };
+const removeUser = async (req, res) => {
+  await deleteUser(req.params.id);
+  return res.status(200).json({ message: 'User deleted' });
+};
+
+module.exports = { login, getSellers, getUsers, removeUser };

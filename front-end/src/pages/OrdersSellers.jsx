@@ -47,8 +47,11 @@ function OrdersSellers() {
         </div>
 
         <div
-          data-testid={ `seller_orders__element-delivery-status--${order.id}` }
-          className={ `seller-order-page-status-${order.status}` }
+          data-testid={ `seller_orders__element-delivery-status-${order.id}` }
+          className={
+            `seller-order-page-status-${order.status.replace('â', 'a')
+              .replace('Em T', 'em-t')}`
+          }
         >
           { order.status }
         </div>

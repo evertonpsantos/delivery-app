@@ -32,4 +32,12 @@ async function findSaleBySeller(req, res) {
   }
 }
 
-module.exports = { registerSale, getSales, findAll, findSaleBySeller };
+async function updateSaleStatus(req, res) {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  await salesService.updateSaleStatus(id, status);
+  return res.status(200).json({ message: 'Updated successfully' });
+}
+
+module.exports = { registerSale, getSales, findAll, findSaleBySeller, updateSaleStatus };

@@ -83,6 +83,21 @@
   text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
 }
 
+.client-order-page-status-em-transito {
+  align-items: center;
+  background-color: rgba(41, 175, 52);
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  font-size: 20px;
+  font-weight: 900;
+  grid-row: 1 / -1;
+  justify-content: center;
+  margin: 10px 0;
+  opacity: 0.75;
+  text-shadow: 0 4px 3px rgba(0, 0, 0, 0.37);
+}
+
 .client-order-page-date-order {
   align-items: center;
   background-color: #f2fffc;
