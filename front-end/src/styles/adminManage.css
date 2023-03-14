@@ -1,0 +1,129 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.admin-title {
+  font-size: 20px;
+  margin-left: 180px;
+  padding: 10px 8px;
+}
+
+.admin-form-container {
+  box-shadow: 0 2px #888;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 15px;
+  justify-content: center;
+  margin: 20px auto;
+  padding-bottom: 30px;
+  width: 90%;
+}
+
+.admin-input {
+  float: left;
+  margin: 0 10px;
+  width: 200px;
+}
+
+.admin-select-type {
+  height: 43px;
+}
+
+.admin-register-button-container {
+  align-items: center;
+  display: flex;
+  float: left;
+  justify-content: center;
+  width: 100px;
+}
+
+.admin-register-button {
+  background-color: #0d5839;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  height: 60px;
+  padding: 13px 50px;
+}
+
+.admin-register-button-disabled {
+  background-color: #94a3a0;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 20px;
+  height: 60px;
+  padding: 13px 50px;
+}
+
+.admin-register-button:hover {
+  cursor: pointer;
+  opacity: 95%;
+}
+
+.users-table {
+  display: grid;
+  font-size: 15px;
+  grid-auto-rows: auto;
+  margin: 0 auto 20px;
+  padding: 20px;
+  width: 80%;
+}
+
+.admin-user-number {
+  background-color: #2fc18c;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  font-size: 25px;
+  font-weight: 800;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+.admin-user-name {
+  background-color: #eaf1ef;
+  font-size: 20px;
+  padding: 10px 15px;
+  place-self: center start;
+  width: 60%;
+}
+
+.admin-user-email {
+  background-color: #036b52;
+  color: white;
+  font-size: 20px;
+  padding: 5px 0;
+  place-self: center start;
+  text-align: center;
+  width: 100%;
+}
+
+.admin-user-role {
+  background-color: #421981;
+  color: white;
+  font-size: 20px;
+  padding: 10px;
+  place-self: center start;
+  text-align: center;
+  width: 100%;
+}
+
+.admin-remove-item-button {
+  background-color: #1cce84;
+  border: none;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+}
+
+.checkout-remove-item-button-container:hover, .admin-remove-item-button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.table-row {
+  margin: 10px;
+}
