@@ -1,13 +1,12 @@
 /* === Page Customer Product Card === */
 .container_cards {
-  display: flex;
+  display: inline-block;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: space-between;
   left: 100px;
-  position: relative;
+  margin: 5px;
   top: 100px;
-  width: 80vw;
 }
 
 .product_card {

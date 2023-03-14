@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
-// import '../styles/cardCustomesProducts.css';
+import '../styles/cardCustomesProducts.css';
 import ContextProduct from '../context/ProductContext';
 
 function ProductCard({ productInfo }) {

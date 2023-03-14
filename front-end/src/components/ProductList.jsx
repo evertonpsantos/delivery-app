@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import ProductCard from './ProductCard';
 import contextProduct from '../context/ProductContext';
+import '../styles/productList.css';
 
 const listProducts = (products) => products.map((product, key) => (
   <ProductCard key={ key } productInfo={ product } />
@@ -28,18 +29,28 @@ function ProductList() {
   return (
     <>
       { valuesProducts
-        ? <form>{ listProducts(valuesProducts) }</form> : <h1>Loading...</h1> }
+        ? (
+          <div
+            className="products-cards-container"
+          >
+            { listProducts(valuesProducts) }
+          </div>
+        ) : <h1>Loading...</h1> }
+
       <button
         type="button"
         data-testid="customer_products__button-cart"
         onClick={ handleClick }
         disabled={ total <= 0.00 }
+        className={ total <= 0.00
+          ? 'customer-products-cart-button-disabled'
+          : 'customer-products-cart-button' }
       >
         Ver Carrinho:
         <p
           data-testid="customer_products__checkout-bottom-value"
         >
-          { String(total).replace('.', ',') }
+          { `R$: ${String(total).replace('.', ',')}` }
         </p>
 
       </button>

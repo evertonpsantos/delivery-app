@@ -1,0 +1,30 @@
+.products-cards-container {
+  display: inline-block;
+  margin: 80px 0 0 120px;
+}
+
+.customer-products-cart-button {
+  background-color: rgb(35, 165, 35);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  height: 50px;
+  left: 1300px;
+  padding: 5px 20px;
+  position: fixed;
+  top: 650px;
+  width: 200px;
+}
+
+.customer-products-cart-button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.customer-products-cart-button-disabled {
+  border: none;
+  left: 1300px;
+  position: fixed;
+  top: 650px;
+}
