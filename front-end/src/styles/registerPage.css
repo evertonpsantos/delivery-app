@@ -12,8 +12,9 @@
 
 .form {
   background-color: #eaf1ef;
-  border: solid black 1px;
+  border: solid rgb(185, 179, 179) 1px;
   border-radius: 4px;
+  box-shadow: 1px 2px rgb(185, 179, 179);
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -28,11 +29,18 @@ h1 {
 }
 
 input {
+  border: 1px black solid;
   border-radius: 4px;
   font-size: 20px;
   height: 40px;
   place-self: center start;
   width: 100%;
+}
+
+input:focus {
+  border: 1px solid rgb(185, 179, 179);
+  box-shadow: 0 0 10px #7a828a;
+  outline: none;
 }
 
 .bg-form {
@@ -49,7 +57,25 @@ input {
   text-decoration: none;
 }
 
-.erro {
-  color: red;
+.button-disabled {
+  background-color: #94a3a0;
+  border: none;
+  border-radius: 5px;
+  color: white;
   font-size: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.erro {
+  border: 1px solid red;
+  color: red;
+  font-size: 15px;
+  padding: 5px;
+  text-align: center;
 }

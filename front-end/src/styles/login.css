@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 150px;
+}
+
+.register {
+  background-color: #f3f7f6;
+  border: 1px solid #036b52;
+  border-radius: 5px;
+  color: #036b52;
+  font-size: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.login-input {
+  padding-left: 4px;
+}
+
+.register:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
