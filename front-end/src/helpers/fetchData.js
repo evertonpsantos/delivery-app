@@ -11,4 +11,4 @@ async function fetchData(endpoint) {
   }
 }
 
-module.exports = fetchData;
+export default fetchData;
