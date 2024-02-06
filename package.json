@@ -29,7 +29,6 @@
   "bugs": {
     "url": "https://github.com/betrybe/sd-0x-project-delivery-app/issues"
   },
-  "homepage": "https://evertonpsantos.github.io/delivery-app/",
   "devDependencies": {
     "@faker-js/faker": "6.0.0",
     "dotenv": "16.0.0",
